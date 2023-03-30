@@ -5,12 +5,13 @@ import loginWithEmailPassword from '../functions/loginWithEmailPassword';
 import registerUser from '../functions/registerUser';
 import loginWithGoogle from '../functions/loginWithGoogle';
 import { FcGoogle } from 'react-icons/fc';
-import resetPassword from '../functions/resetPassword';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../firebase-config';
 
 
 const Logueo = () => {
     const [isRegistrando, setIsRegistrando] = useState(false);
-
+    const [email, setEmail] = useState('');
     async function submitHandler(e) {
         e.preventDefault();
         const email = e.target.email.value;
@@ -25,6 +26,18 @@ const Logueo = () => {
         }
     }
 
+   /* const resetPassword = () => {
+        if (email != null) {
+            sendPasswordResetEmail(auth, email)
+            .then (() => {
+              alert("Email de reseteo de password enviado");
+            })
+            .catch((error) => {
+                alert(error.message);
+            })
+        }
+    }*/
+
     return (
         <>
             <div class="container mt-5">
@@ -35,10 +48,10 @@ const Logueo = () => {
                 <form onSubmit={submitHandler} className="formularioLogueo">
 
                     <label htmlFor="emailField">Correo</label>
-                    <input type="email" id="email" />
+                    <input type="email" id="email" placeholder='Email' />
 
                     <label htmlFor="passwordField">Contraseña</label>
-                    <input type="password" id="contrasena" />
+                    <input type="password" id="contrasena" placeholder='Contraseña' />
                     <div class="d-flex justify-content-between">
                         <div class="btn-group" role="group">
                             <button type="submit" class="btn btn-dark m-2 rounded">
@@ -59,7 +72,7 @@ const Logueo = () => {
                             : "¿No tienes cuenta? Regístrate"}
                     </button>
 
-                    <button onClick={ resetPassword }></button>
+                    <button class="btn btn-dark btn-sm m-2">Resetear contraseña</button>
                 </div>
             </div>
         </>

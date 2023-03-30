@@ -42,8 +42,8 @@ function App() {
               <Route path='/' element={<MainPage />} />
             )}
             <Route path='/contacto' element={<Contacto />} />
-            <Route path={`/movies/:id`} element={<MovieRooms />} />
-            <Route path='/reserva/:id/:selectedRoom' element={<Seats />}/>
+            <Route path={`/movies/:id/:title`} element={<MovieRooms />} />
+            <Route path='/reserva/:id/:title/:selectedRoom' element={<Seats />}/>
           </Routes>
         </BrowserRouter>
       </StyledApp>

@@ -1,12 +1,12 @@
-import { sendPasswordResetEmail } from 'firebase/auth'
-import { auth } from '../firebase-config'
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
-export default function resetPassword(email) {
+const auth = getAuth();
+const email = 
+sendPasswordResetEmail(auth, email)
+  .then(() => {
+    alert("Email enviado para reseteo")
+  })
+  .catch((error) => {
+    alert(error.message);
 
-    sendPasswordResetEmail(auth, email)
-    .then(() => {
-        alert("Se ha enviado un correo para resetear password");
-    }).catch((error) => {
-        alert(error.message);
-    });
-}
+});

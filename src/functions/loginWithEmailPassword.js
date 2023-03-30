@@ -6,6 +6,6 @@ export default async function loginWithEmailPassword(email, password) {
         const user = await signInWithEmailAndPassword(auth, email, password);
         console.log(user);
     } catch (error) {
-        console.log(error);
+        alert("Ese email no existe");
     }
 }

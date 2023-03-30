@@ -9,7 +9,7 @@ function ItemMovie(props) {
 
 
     return (
-        <Link to={`/movies/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>  {/**Link que lleva a la pelicula con su id en la barra del navegador */}
+        <Link to={`/movies/${id}/${title}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>  {/**Link que lleva a la pelicula con su id en la barra del navegador */}
             <div>
                 <article>
                     <div className="item-movie" style={{ backgroundImage: `url(${image})` }}>  {/**Muestra la imagen de la pelicula en la pagina principal */}

@@ -5,13 +5,31 @@ import salaCine from "../images/salaCine.png";
 import salaCine2 from "../images/salaCine2.png";
 import salaCine3 from "../images/salaCine3.png";
 import BackButton from './BackButton';
+import { getFirestore } from 'firebase/firestore';
+import firebaseApp from '../firebase-config';
+import { addDoc } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 
 function MovieRooms() {
-  const { id } = useParams();  // Obtiene la id de la película desde los parámetros de la URL
+  const { id, title } = useParams();  // Obtiene la id de la película desde los parámetros de la URL
   const [selectedRoom, setSelectedRoom] = useState('');
 
   function handleSelectRoom(room) {
     setSelectedRoom(room);
+  }
+
+   const saveReceipt = async () => {
+    const db = getFirestore(firebaseApp);
+
+    // Guardar el recibo en la base de datos de Firebase
+    const receipt = addDoc(collection(db, "recibos"), {
+      salaReservada: selectedRoom,
+      idPelicula: id,
+      nombrePelicula: title,
+      fecha: new Date()
+    });
+
+    console.log("Recibo enviado a la bbdd:", receipt.id);
   }
 
   return (
@@ -41,8 +59,8 @@ function MovieRooms() {
       {selectedRoom && (
         <Row className="mt-5">
           <Col className="text-center">
-            <Link to={`/reserva/${id}/${selectedRoom}`}>
-              <Button variant="primary" size="lg">Seleccionar butacas para {selectedRoom}</Button>
+            <Link to={`/reserva/${id}/${title}/${selectedRoom}`}>
+            <Button variant="primary" size="lg" onClick={saveReceipt}>Reservar butacas para {selectedRoom}</Button>
             </Link>
           </Col>
         </Row>
