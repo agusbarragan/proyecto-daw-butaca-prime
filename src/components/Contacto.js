@@ -7,13 +7,15 @@ import NavigationBar from './Navbar';
 const Contacto = () => {
     return (
         <>
-        <NavigationBar />
+            <NavigationBar />
             <Container>
                 <Row>
                     <Col>
                         <h2 class="text-light">Sobre Nosotros</h2>
                         <p>
-                            Bienvenidos a nuestra página web de reserva de butacas de cine. Nos dedicamos a ofrecer una experiencia única y cómoda a nuestros clientes, permitiéndoles reservar sus butacas desde la comodidad de su hogar.
+                            Bienvenidos a nuestra página web de reserva de butacas de cine.
+                            Nos dedicamos a ofrecer una experiencia única y cómoda a nuestros clientes,
+                            permitiéndoles reservar sus butacas desde la comodidad de su hogar.
                         </p>
                     </Col>
                 </Row>
@@ -21,7 +23,9 @@ const Contacto = () => {
                     <Col>
                         <h2 class='text-light'>Contacto</h2>
                         <p>
-                            Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros. Puedes encontrarnos en las siguientes redes sociales:
+                            Si tienes alguna pregunta o comentario,
+                            no dudes en ponerte en contacto con nosotros.
+                            Puedes encontrarnos en las siguientes redes sociales:
                         </p>
                         <ul className='list-group list-group-horizontal list-unstyled justify-content-center'>
                             <li>
@@ -37,6 +41,7 @@ const Contacto = () => {
                     </Col>
                 </Row>
             </Container>
+        
             <BackButton />
         </>
     );
