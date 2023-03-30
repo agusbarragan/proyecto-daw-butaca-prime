@@ -6,10 +6,12 @@ import firebaseApp from '../firebase-config';
 //import { getDatabase } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, updateDoc, deleteField, getFirestore } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
 
 export default function CinemaRoom() {
     const [seats, setSeats] = useState(new Array(60).fill(false)); // matriz de butacas
     const [selectedSeats, setSelectedSeats] = useState(0);
+    const { title } = useParams();
 
     const db = getFirestore(firebaseApp);
 
@@ -44,6 +46,7 @@ export default function CinemaRoom() {
                 numeroRecibo: nuevoNumeroRecibo,
                 email: userEmail,
                 salaReservada: salaReserva,
+                nombrePelicula: title,
                 fecha: new Date(),
             });
 

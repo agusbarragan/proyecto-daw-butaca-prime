@@ -30,7 +30,7 @@ function App() {
       </div>
       {usuario && (
         <div class='d-flex justify-content-end'>
-          <p class='text-light'>¡Bienvenido! {usuario.email}</p>
+          <p class='text-light m-2'>¡Bienvenido! {usuario.email}</p>
         </div>
       )}
       {usuario ? <Home /> : <Logueo />}
