@@ -44,6 +44,7 @@ export default function CinemaRoom() {
                 numeroRecibo: nuevoNumeroRecibo,
                 email: userEmail,
                 salaReservada: salaReserva,
+                fecha: new Date(),
             });
 
             alert("Recibo enviado a la bbdd");
@@ -102,7 +103,9 @@ export default function CinemaRoom() {
             </Row>
             <p class='text-light d-flex flex-row'>Butacas seleccionadas: {selectedSeats}</p>
             <Button onClick={saveReceipt} className='m-2'>Enviar Recibo</Button>
-            <Button onClick={"receipt"}>Informe Recibo</Button>
+            
+            
+            {/*<Button onClick={"receipt"}>Informe Recibo</Button>*/}
 
            {/* <Button onClick={ cancelReserve } className='m-2'>Cancelar reserva</Button>*/}
 

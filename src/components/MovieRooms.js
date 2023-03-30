@@ -6,7 +6,7 @@ import salaCine2 from "../images/salaCine2.png";
 import salaCine3 from "../images/salaCine3.png";
 import BackButton from './BackButton';
 import { getFirestore } from 'firebase/firestore';
-import firebaseApp from '../firebase-config';
+import firebaseApp, { auth } from '../firebase-config';
 import { addDoc } from 'firebase/firestore';
 import { collection } from 'firebase/firestore';
 
@@ -20,13 +20,15 @@ function MovieRooms() {
 
    const saveReceipt = async () => {
     const db = getFirestore(firebaseApp);
+    const userEmail = auth.currentUser.email;
 
     // Guardar el recibo en la base de datos de Firebase
     const receipt = addDoc(collection(db, "recibos"), {
+      idPelicula: id,     
       salaReservada: selectedRoom,
-      idPelicula: id,
+      email: userEmail,
       nombrePelicula: title,
-      fecha: new Date()
+      fecha: new Date(),
     });
 
     console.log("Recibo enviado a la bbdd:", receipt.id);
