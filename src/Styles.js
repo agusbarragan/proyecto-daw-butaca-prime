@@ -155,6 +155,13 @@ p.author a {
     border: 1px solid #ccc;
   }
 
+  .input-group {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
   /*.formularioLogueo button {
     background-color: #007bff;
     color: #fff;

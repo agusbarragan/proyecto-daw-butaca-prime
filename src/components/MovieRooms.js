@@ -43,18 +43,21 @@ function MovieRooms() {
           <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoom('Sala 1')}>
             Sala 1
             <Image className="p-2" src={salaCine} fluid roundedCircle />
+            Hora: 16:00H
           </Button>
         </Col>
         <Col sm={4}>
           <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoom('Sala 2')}>
             Sala 2
             <Image className="p-2" src={salaCine3} fluid roundedCircle />
+            Hora: 20:00H 
           </Button>
         </Col>
         <Col sm={4}>
           <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoom('Sala 3')}>
             Sala 3
             <Image className="p-2" src={salaCine2} fluid roundedCircle />
+            Hora: 22:00H
           </Button>
         </Col>
       </Row>

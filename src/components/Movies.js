@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
+import addSeats from "../functions/addSeats";
 import ItemMovie from "./ItemMovie";
 
 const Movies = () => {
@@ -20,9 +21,15 @@ const Movies = () => {
                     />
                 ))
                     : ''
-            }
+            }            
+            <>
+            {/*<button onClick={addSeats} type="button"></button>*/}
+            </>
+
         </div>
+
     );
+
 }
 
 export default Movies;

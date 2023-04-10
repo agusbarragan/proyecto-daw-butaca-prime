@@ -6,18 +6,17 @@ const db = getFirestore(firebaseApp);
 
 export default async function registerUser(email, password) {
     try {
-        await addDoc(collection(db, "usuarios"),{
-            email: document.getElementById("email").value,
-            authProvider: "local",
-        })
 
         const res = await createUserWithEmailAndPassword(auth, email, password);
 
+        await addDoc(collection(db, "usuarios"), {
+            email: document.getElementById("email").value,
+            authProvider: "local",
+        })
         alert("Email registrado");
-
 
         console.log(res);
     } catch (error) {
-        console.log(error);
+        alert(error);
     }
 }

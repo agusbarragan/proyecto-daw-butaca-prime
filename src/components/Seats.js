@@ -12,6 +12,7 @@ export default function CinemaRoom() {
     const [seats, setSeats] = useState(new Array(60).fill(false)); // matriz de butacas
     const [selectedSeats, setSelectedSeats] = useState(0);
     const { title } = useParams();
+    const [selectedPrice, setSelectedPrice] = useState(0);
 
     const db = getFirestore(firebaseApp);
 
@@ -21,6 +22,9 @@ export default function CinemaRoom() {
         setSeats(newSeats);
 
         setSelectedSeats(selectedSeats + (newSeats[index] ? 1 : -1));
+        setSelectedPrice(selectedPrice + (newSeats[index] ? 5 : -5));
+        
+
     };
 
    
@@ -30,7 +34,8 @@ export default function CinemaRoom() {
 
     const saveReceipt = () => {
         const auth = getAuth(firebaseApp);
-        const salaReserva =""                           //Tengo que arreglar como se coloca la sala elegida por el cliente al recibir el recibo en la base de datos
+        const butacasReservadas = "";
+        const salaReserva = "";                           //Tengo que arreglar como se coloca la sala elegida por el cliente al recibir el recibo en la base de datos
         const userEmail = auth.currentUser.email;
         const reciboRef = collection(db, "recibos");
         const ultimoReciboRef = doc(reciboRef, "ultimo");
@@ -46,21 +51,45 @@ export default function CinemaRoom() {
                 numeroRecibo: nuevoNumeroRecibo,
                 email: userEmail,
                 salaReservada: salaReserva,
+                butacas: butacasReservadas,
                 nombrePelicula: title,
+                precioReserva: `${selectedPrice} €`,
                 fecha: new Date(),
             });
 
             alert("Recibo enviado a la bbdd");
 
-                // Construir la URL con los datos del cliente y la información de la reserva
+                /*Construir la URL con los datos del cliente y la información de la reserva
                 const baseUrl = window.location.origin;
                 const queryParams = `?email=${userEmail}&movie=${"movieName"}&seats=${selectedSeats}&sala=${salaReserva}&fecha=${fechaReserva}`;
                 const url = `${baseUrl}/receipt${queryParams}`;
               
                 // Abrir la nueva ventana con la URL construida
-                window.open(url, '_blank');
-            
-              
+                window.open(url, '_blank');*/
+
+                const reciboContent = `
+                <html>
+                  <head>
+                    <title>Recibo ${nuevoNumeroRecibo}</title>
+                  </head>
+                  <body>
+                    <h1>Recibo ${nuevoNumeroRecibo}</h1>
+                    <p>Fecha de reserva: ${fechaReserva.toLocaleDateString()} a las ${fechaReserva.toLocaleTimeString()}</p>
+
+                    <p>Nombre de la pelicula: ${title}</p>
+                    <p>Sala reservada: ${salaReserva}</p>
+                    <p>Butacas reservadas: ${butacasReservadas}</p>
+                    <p>Email del cliente: ${userEmail}</p>
+                    <p>Precio de reserva: ${selectedPrice} €</p>
+                  </body>
+                </html>
+              `;
+          
+              // Abrir una nueva pestaña con el contenido del recibo
+              const newWindow = window.open("");
+              newWindow.document.write(reciboContent);
+
+        
             
             //Arreglar la suma de 1 en 1 cada vez que se envia un recibo a la base de datos, que el numeroRecibo sea 1, 2, 3, 4, etc...
             //Añadir tambien una ventana emergente que muestre el recibo por ejemplo en pdf, con el precio, email, sala y butacas reservadas
@@ -105,12 +134,15 @@ export default function CinemaRoom() {
                 ))}
             </Row>
             <p class='text-light d-flex flex-row'>Butacas seleccionadas: {selectedSeats}</p>
-            <Button onClick={saveReceipt} className='m-2'>Enviar Recibo</Button>
+            <p class='text-light d-flex align-content-end'>Precio: {selectedPrice}€</p>
+            <Button onClick={saveReceipt} className='m-2'>Conseguir Ticket</Button>
             
             
             {/*<Button onClick={"receipt"}>Informe Recibo</Button>*/}
 
-           {/* <Button onClick={ cancelReserve } className='m-2'>Cancelar reserva</Button>*/}
+           {/* <Button onClick={ cancelReserve } className='m-2'>Cancelar reserva</Button> 
+           Tengo ya el boton de abajo BackButton para volver atras, por lo que no creo que haga falta este boton de cancelReserve
+           */} 
 
             <BackButton />
         </Container>

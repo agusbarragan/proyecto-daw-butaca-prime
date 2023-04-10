@@ -7,11 +7,12 @@ import loginWithGoogle from '../functions/loginWithGoogle';
 import { FcGoogle } from 'react-icons/fc';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../firebase-config';
+import ResetPassword from '../functions/resetPassword';
 
 
 const Logueo = () => {
     const [isRegistrando, setIsRegistrando] = useState(false);
-    const [email, setEmail] = useState('');
+    const [showResetPassword, setShowResetPassword] = useState(false)
     async function submitHandler(e) {
         e.preventDefault();
         const email = e.target.email.value;
@@ -26,17 +27,6 @@ const Logueo = () => {
         }
     }
 
-   /* const resetPassword = () => {
-        if (email != null) {
-            sendPasswordResetEmail(auth, email)
-            .then (() => {
-              alert("Email de reseteo de password enviado");
-            })
-            .catch((error) => {
-                alert(error.message);
-            })
-        }
-    }*/
 
     return (
         <>
@@ -44,39 +34,48 @@ const Logueo = () => {
                 <h1 class="text-center display-4 text-light">Butaca Reserve</h1>
             </div>
             <div className='divLogueo'>
-                <h1> {isRegistrando ? "Regístrate" : "Inicia sesión"} </h1>
-                <form onSubmit={submitHandler} className="formularioLogueo">
+                {showResetPassword ? (
+                    <>
+                        <ResetPassword />
+                        <button className='btn btn-dark' onClick={() => setShowResetPassword(false)}>Cancelar</button>
+                    </>
+                ) : (
+                    <>
+                        <h1> {isRegistrando ? "Regístrate" : "Inicia sesión"} </h1>
+                        <form onSubmit={submitHandler} className="formularioLogueo">
 
-                    <label htmlFor="emailField">Correo</label>
-                    <input type="email" id="email" placeholder='Email' />
+                            <label htmlFor="emailField">Correo</label>
+                            <input type="email" id="email" placeholder='Email' />
 
-                    <label htmlFor="passwordField">Contraseña</label>
-                    <input type="password" id="contrasena" placeholder='Contraseña' />
-                    <div class="d-flex justify-content-between">
-                        <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-dark m-2 rounded">
-                                {" "}
-                                {isRegistrando ? "Regístrate" : "Inicia sesión"}{" "}
+                            <label htmlFor="passwordField">Contraseña</label>
+                            <input type="password" id="contrasena" placeholder='Contraseña' />
+                            <div class="d-flex justify-content-between">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-dark m-2 rounded">
+                                        {" "}
+                                        {isRegistrando ? "Regístrate" : "Inicia sesión"}{" "}
+                                    </button>
+
+                                    <button onClick={loginWithGoogle} type="button" className="botonGoogle" class="btn btn-dark m-2 rounded">
+                                        Accede con Google <i>{<FcGoogle size="1em" />}</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="d-flex justify-content-center">
+                            <button onClick={() => setIsRegistrando(!isRegistrando)} class="btn btn-dark btn-sm">
+                                {isRegistrando ? "¿Ya tiene cuenta? Inicia sesión"
+                                    : "¿No tienes cuenta? Regístrate"}
                             </button>
-
-                            <button onClick={loginWithGoogle} type="button" className="botonGoogle" class="btn btn-dark m-2 rounded">
-                                Accede con Google <i>{<FcGoogle size="1em" />}</i>
-                            </button>
+                            <button class='btn btn-dark btn-sm m-2' onClick={setShowResetPassword}>Resetear contraseña</button>
                         </div>
-                    </div>
-                </form>
+                    </>
+                )}
 
-                <div class="d-flex justify-content-center">
-                    <button onClick={() => setIsRegistrando(!isRegistrando)} class="btn btn-dark btn-sm">
-                        {isRegistrando ? "¿Ya tiene cuenta? Inicia sesión"
-                            : "¿No tienes cuenta? Regístrate"}
-                    </button>
-
-                    <button class="btn btn-dark btn-sm m-2">Resetear contraseña</button>
-                </div>
             </div>
-        </>
-    )
+</>
+            )
 }
 
-export default Logueo;
+            export default Logueo;
