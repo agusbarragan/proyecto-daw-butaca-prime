@@ -1,0 +1,18 @@
+   const reciboContent = `
+                <html>
+                  <head>
+                    <title>Recibo ${nuevoNumeroRecibo}</title>
+                  </head>
+                  <body>
+                    <h1>Recibo ${nuevoNumeroRecibo}</h1>
+                    <div>
+                        <p>Fecha de reserva: ${fechaReserva.toLocaleDateString()} a las ${fechaReserva.toLocaleTimeString()}</p>
+                        <p>Nombre de la pelicula: ${title}</p>
+                        <p>Sala reservada: ${salaReserva.selectedRoom}</p>
+                        <p>Butacas reservadas: ${butacasReservadas}</p>
+                        <p>Email del cliente: ${userEmail}</p>
+                        <p>Precio de reserva: ${selectedPrice} €</p>
+                    </div>
+                  </body>
+                </html>
+              `;
