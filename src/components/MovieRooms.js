@@ -18,7 +18,10 @@ function MovieRooms() {
     setSelectedRoom(room);
   }
 
-   const saveReceipt = async () => {
+   /*const saveReceipt = async () => {  
+    ESTO VALE PARA GUARDAR EN LA BASE DE DATOS LA SALA QUE HEMOS ELEGIDO 
+    PERO YA TENGO EN EL ARCHIVO SEATS.js 
+    LA MANERA DE GUARDAR EN LA BASE DE DATOS EL RECIBO COMPLETO
     const db = getFirestore(firebaseApp);
     const userEmail = auth.currentUser.email;
 
@@ -32,7 +35,7 @@ function MovieRooms() {
     });
 
     console.log("Recibo enviado a la bbdd:", receipt.id);
-  }
+  }*/
 
   return (
     <>    
@@ -65,7 +68,7 @@ function MovieRooms() {
         <Row className="mt-5">
           <Col className="text-center">
             <Link to={`/reserva/${id}/${title}/${selectedRoom}`}>
-            <Button variant="primary" size="lg" onClick={saveReceipt}>Reservar butacas para {selectedRoom}</Button>
+            <Button variant="primary" size="lg" onClick={handleSelectRoom}>Reservar butacas para {selectedRoom}</Button>
             </Link>
           </Col>
         </Row>

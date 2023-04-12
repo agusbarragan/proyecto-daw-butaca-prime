@@ -16,3 +16,33 @@
                   </body>
                 </html>
               `;
+
+
+Bienvenido a nuestra página web de reserva de butacas de cine. 
+Somos una plataforma en línea que busca facilitar la experiencia de compra de entradas para el cine. 
+Con la ayuda de nuestra plataforma, 
+los usuarios pueden reservar sus butacas para su película favorita sin tener que hacer largas colas 
+o preocuparse por el agotamiento de las entradas.
+
+Nuestro equipo está compuesto por expertos en tecnología y amantes del cine que han trabajado duro 
+para diseñar y desarrollar una interfaz fácil de usar y funcional. 
+Nuestro objetivo es ofrecer una experiencia de usuario 
+sencilla y sin complicaciones para nuestros clientes, desde la selección de películas hasta la compra 
+de entradas.
+
+En nuestra página web, puedes encontrar una lista completa de las películas que se proyectan en los cines 
+de tu ciudad. También puedes elegir tu cine y la hora de la función, 
+y reservar las butacas que desees. Ofrecemos 
+opciones de pago seguras y confiables, así como la posibilidad de cancelar o cambiar tu reserva en caso 
+de que cambies de opinión.
+
+Nuestro compromiso con la satisfacción del cliente es nuestra principal prioridad. Trabajamos duro para
+asegurarnos de que cada usuario tenga una experiencia positiva 
+al utilizar nuestra plataforma y de que estén satisfechos con su compra. 
+Si tienes alguna pregunta o inquietud, nuestro equipo de soporte está disponible para ayudarte en cualquier 
+momento.
+
+En resumen, somos una plataforma en línea de reserva de butacas de cine que se enfoca en hacer que la 
+experiencia de compra de entradas sea fácil, rápida y sin complicaciones. 
+Esperamos que disfrutes de la selección de películas y de la comodidad 
+de reservar tus butacas en línea. ¡Gracias por confiar en nosotros!

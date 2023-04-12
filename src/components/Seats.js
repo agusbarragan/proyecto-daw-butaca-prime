@@ -103,6 +103,7 @@ export default function CinemaRoom() {
             // Remueve el listener
 
             unsubscribe();
+            
         })
     }
 

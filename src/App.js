@@ -11,6 +11,7 @@ import { GlobalStyled, StyledApp } from './Styles';
 import MovieRooms from './components/MovieRooms';
 import Contacto from './components/Contacto';
 import Seats from './components/Seats';
+import StarRating from './components/StarRating';
 
 function App() {
  
@@ -41,6 +42,7 @@ function App() {
             {usuario && (
               <Route path='/' element={<MainPage />} />
             )}
+            <Route path='/starrating' element={<StarRating />} />
             <Route path='/contacto' element={<Contacto />} />
             <Route path={`/movies/:id/:title`} element={<MovieRooms />} />
             <Route path='/reserva/:id/:title/:selectedRoom' element={<Seats />}/>
