@@ -22,5 +22,3 @@ export const auth = getAuth(firebaseApp);
 getDatabase(firebaseApp);
 
 export default firebaseApp;
-
-

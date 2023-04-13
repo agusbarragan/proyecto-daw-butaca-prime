@@ -13,6 +13,7 @@ export default function CinemaRoom() {
     const { title } = useParams();
     const [selectedPrice, setSelectedPrice] = useState(0);
     const selectedRoom = useParams();  //Accedo a la url que esta en MovieRooms.js y luego esta variable la paso a la constante salaReserva y la leo en el document.write salaReserva.selectedRoom
+    const horaReservada = useParams();
 
     const db = getFirestore(firebaseApp);
 
@@ -25,7 +26,6 @@ export default function CinemaRoom() {
         setSelectedPrice(selectedPrice + (newSeats[index] ? 5 : -5));
     };
 
-
     //Guardar los recibos en la cloud firestore lo puede configurar gracias a este video
     // https://www.youtube.com/watch?v=8idyed4aJEA&t=58s
 
@@ -35,7 +35,7 @@ export default function CinemaRoom() {
             .map((seat, index) => (seat ? index + 1 : null))
             .filter((seat) => seat !== null)
             .join(", ");
-
+            
         const salaReserva = selectedRoom;                           //Arreglado linea 16
         const userEmail = auth.currentUser.email;
         const reciboRef = collection(db, "recibos");
@@ -75,6 +75,7 @@ export default function CinemaRoom() {
                         <p>Fecha de reserva: ${fechaReserva.toLocaleDateString()} a las ${fechaReserva.toLocaleTimeString()}</p>
                         <p>Nombre de la pelicula: ${title}</p>
                         <p>Sala reservada: ${salaReserva.selectedRoom}</p>
+                        <p>Hora de reserva: ${horaReservada.hora}</p>
                         <p>Butacas reservadas: ${butacasReservadas}</p>
                         <p>Email del cliente: ${userEmail}</p>
                         <p>Precio de reserva: ${selectedPrice} €</p>
@@ -83,14 +84,10 @@ export default function CinemaRoom() {
                 </html>
               `;
 
-
             
             // Abrir una nueva pestaña con el contenido del recibo
             const newWindow = window.open("");
             newWindow.document.write(reciboContent);
-
-            
-
 
 
             //Arreglar la suma de 1 en 1 cada vez que se envia un recibo a la base de datos, que el numeroRecibo sea 1, 2, 3, 4, etc...
@@ -109,15 +106,14 @@ export default function CinemaRoom() {
 
     return (
         <Container>
-
             <h1 class='text-light'>Butacas disponibles</h1>
-
             <Row>
                 {seats.map((seat, index) => (
                     <Col key={index} xs={2} className="mb-3">
                         <Button className='m-2'
                             variant={seat ? "success" : "danger"}
                             onClick={() => toggleSeat(index)}
+                            
                         //disabled={index === 10 || index === 20 || index === 30 || index === 40 || index === 50}
                         >
                             <MdOutlineEventSeat className='m-1' />
@@ -132,9 +128,9 @@ export default function CinemaRoom() {
             
             <Button onClick={saveReceipt} className='m-2'>Conseguir Ticket</Button>
             
+            
             <BackButton />
 
         </Container>
     );
 };
-

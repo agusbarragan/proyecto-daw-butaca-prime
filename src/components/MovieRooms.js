@@ -5,18 +5,17 @@ import salaCine from "../images/salaCine.png";
 import salaCine2 from "../images/salaCine2.png";
 import salaCine3 from "../images/salaCine3.png";
 import BackButton from './BackButton';
-import { getFirestore } from 'firebase/firestore';
-import firebaseApp, { auth } from '../firebase-config';
-import { addDoc } from 'firebase/firestore';
-import { collection } from 'firebase/firestore';
 
 function MovieRooms() {
   const { id, title } = useParams();  // Obtiene la id de la película desde los parámetros de la URL
   const [selectedRoom, setSelectedRoom] = useState('');
+  const [horaReservada, setHoraReservada] = useState('');
 
-  function handleSelectRoom(room) {
+  function handleSelectRoomAndHour(room, hora) {
     setSelectedRoom(room);
+    setHoraReservada(hora);
   }
+ 
 
    /*const saveReceipt = async () => {  
     ESTO VALE PARA GUARDAR EN LA BASE DE DATOS LA SALA QUE HEMOS ELEGIDO 
@@ -43,21 +42,21 @@ function MovieRooms() {
       <h2 className="text-center text-light mb-5">Salas disponibles</h2>
       <Row>
         <Col sm={4}>
-          <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoom('Sala 1')}>
+          <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoomAndHour('Sala 1', '16:00H')}>
             Sala 1
             <Image className="p-2" src={salaCine} fluid roundedCircle />
             Hora: 16:00H
           </Button>
         </Col>
         <Col sm={4}>
-          <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoom('Sala 2')}>
+          <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoomAndHour('Sala 2', '20:00H' )}>
             Sala 2
             <Image className="p-2" src={salaCine3} fluid roundedCircle />
             Hora: 20:00H 
           </Button>
         </Col>
         <Col sm={4}>
-          <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoom('Sala 3')}>
+          <Button variant="outline-primary" size="lg" onClick={() => handleSelectRoomAndHour('Sala 3', '22:00H')}>
             Sala 3
             <Image className="p-2" src={salaCine2} fluid roundedCircle />
             Hora: 22:00H
@@ -67,8 +66,8 @@ function MovieRooms() {
       {selectedRoom && (
         <Row className="mt-5">
           <Col className="text-center">
-            <Link to={`/reserva/${id}/${title}/${selectedRoom}`}>
-            <Button variant="primary" size="lg" onClick={handleSelectRoom}>Reservar butacas para {selectedRoom}</Button>
+            <Link to={`/reserva/${id}/${title}/${selectedRoom}/${horaReservada}`}>
+            <Button variant="primary" size="lg" onClick={handleSelectRoomAndHour}>Reservar butacas para {selectedRoom}</Button>
             </Link>
           </Col>
         </Row>

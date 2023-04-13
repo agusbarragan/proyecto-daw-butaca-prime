@@ -45,7 +45,7 @@ function App() {
             <Route path='/starrating' element={<StarRating />} />
             <Route path='/contacto' element={<Contacto />} />
             <Route path={`/movies/:id/:title`} element={<MovieRooms />} />
-            <Route path='/reserva/:id/:title/:selectedRoom' element={<Seats />}/>
+            <Route path='/reserva/:id/:title/:selectedRoom/:hora' element={<Seats />}/>
           </Routes>
         </BrowserRouter>
       </StyledApp>

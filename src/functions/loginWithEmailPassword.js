@@ -7,5 +7,7 @@ export default async function loginWithEmailPassword(email, password) {
         console.log(user);
     } catch (error) {
         alert("Ese email no existe");
+        //si el email no existe error
+        //si la contraseña esta mal error tambien
     }
 }
