@@ -9,6 +9,7 @@ que entre o salga de ella.
 GOZ -> 2. He añadido una alerta en pantalla cuando le doy a "conseguir ticket" en Seats.js     LÍNEA 143 en Seats.js
 
 ----- 3. He creado VentanaEmergente.js pero no funciona hay que arreglarlo y poder recibir el ticket generado de alguna forma.
+
 ----- 4. He tocado algo de estilos también del componente StarRating.js en el textarea, las estrellas ,"Deja tu opinion" y los 2 botones: enviar y cancelar
 
 
