@@ -162,6 +162,8 @@ p.author a {
     border: 1px solid #ccc;
   }
 
+
+
   /*.formularioLogueo button {
     background-color: #007bff;
     color: #fff;

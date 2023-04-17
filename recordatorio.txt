@@ -1,0 +1,14 @@
+
+
+17 ABRIL 2023
+-------------
+
+----- 1. Tengo que añadir al StarRating.js la caja de comentarios con el usuario que ha escrito la reseña, poder borrarlos y que se guarden en la pagina cada vez
+que entre o salga de ella.
+
+GOZ -> 2. He añadido una alerta en pantalla cuando le doy a "conseguir ticket" en Seats.js     LÍNEA 143 en Seats.js
+
+----- 3. He creado VentanaEmergente.js pero no funciona hay que arreglarlo y poder recibir el ticket generado de alguna forma.
+
+
+

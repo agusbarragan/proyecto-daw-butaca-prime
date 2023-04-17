@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 import { MdOutlineEventSeat } from 'react-icons/md';
 import BackButton from './BackButton';
 import firebaseApp from '../firebase-config';
 import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
+import { VentanaEmergente } from './VentanaEmergente';
+
 
 export default function CinemaRoom() {
     const [seats, setSeats] = useState(new Array(60).fill(false)); // matriz de butacas
@@ -14,6 +16,7 @@ export default function CinemaRoom() {
     const [selectedPrice, setSelectedPrice] = useState(0);
     const selectedRoom = useParams();  //Accedo a la url que esta en MovieRooms.js y luego esta variable la paso a la constante salaReserva y la leo en el document.write salaReserva.selectedRoom
     const horaReservada = useParams();
+    const [showModal, setShowModal] = useState(false);
 
     const db = getFirestore(firebaseApp);
 
@@ -36,7 +39,7 @@ export default function CinemaRoom() {
             .filter((seat) => seat !== null)
             .join(", ");
             
-        const salaReserva = selectedRoom;                           //Arreglado linea 16
+            const salaReserva = selectedRoom;                           //Arreglado linea 16
         const userEmail = auth.currentUser.email;
         const reciboRef = collection(db, "recibos");
         const ultimoReciboRef = doc(reciboRef, "ultimo");
@@ -57,9 +60,8 @@ export default function CinemaRoom() {
                 nombrePelicula: title,
                 precioReserva: `${selectedPrice} €`,
                 fecha: new Date(),
-            });
+            });            
 
-            alert("Recibo enviado a la bbdd");
 
             //Intentar exportarlo a una funcion para aplicar estilos
             //Hacer tambien que cuando envie el recibo deshabilite las butacas seleccionadas
@@ -84,10 +86,16 @@ export default function CinemaRoom() {
                 </html>
               `;
 
-            
+              //<VentanaEmergente nuevoNumeroRecibo={nuevoNumeroRecibo} title={title} horaReservada={horaReservada} />
+              
+
+
+
+             // const newWindow = window.open('', ' _blank');
+             // newWindow.document.write(reciboContent);
+
             // Abrir una nueva pestaña con el contenido del recibo
-            const newWindow = window.open("");
-            newWindow.document.write(reciboContent);
+           
 
 
             //Arreglar la suma de 1 en 1 cada vez que se envia un recibo a la base de datos, que el numeroRecibo sea 1, 2, 3, 4, etc...
@@ -101,15 +109,20 @@ export default function CinemaRoom() {
 
             unsubscribe();
             
+
         })
     }
-
+    function handleShow() {
+        setShowModal(true);
+        saveReceipt();
+       }
+    
     return (
         <Container>
             <h1 class='text-light'>Butacas disponibles</h1>
             <Row>
                 {seats.map((seat, index) => (
-                    <Col key={index} xs={2} className="mb-3">
+                    <Col key={index} xs={2} className="mb-2">
                         <Button className='m-2'
                             variant={seat ? "success" : "danger"}
                             onClick={() => toggleSeat(index)}
@@ -126,9 +139,21 @@ export default function CinemaRoom() {
             <p class='text-light d-flex flex-row'>Butacas seleccionadas: {selectedSeats}</p>
             <p class='text-light d-flex align-content-end'>Precio: {selectedPrice}€</p>
             
-            <Button onClick={saveReceipt} className='m-2'>Conseguir Ticket</Button>
-            
-            
+            {selectedSeats === 0 ? <p>Seleccione las butacas que desea reservar</p> : <Button onClick={handleShow} className='m-2' id='botonRecibo'>Conseguir Ticket</Button>}
+                    <Modal show={showModal} onHide={() => setShowModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Información</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Reserva realizada, disfrute de la pelicula.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Cerrar
+                        </Button>
+                    </Modal.Footer>
+                    </Modal>
+        
             <BackButton />
 
         </Container>

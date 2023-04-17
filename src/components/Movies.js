@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
-import addSeats from "../functions/addSeats";
 import ItemMovie from "./ItemMovie";
 
 const Movies = () => {

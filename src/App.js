@@ -12,6 +12,7 @@ import MovieRooms from './components/MovieRooms';
 import Contacto from './components/Contacto';
 import Seats from './components/Seats';
 import StarRating from './components/StarRating';
+import { VentanaEmergente } from './components/VentanaEmergente';
 
 function App() {
  
@@ -46,6 +47,7 @@ function App() {
             <Route path='/contacto' element={<Contacto />} />
             <Route path={`/movies/:id/:title`} element={<MovieRooms />} />
             <Route path='/reserva/:id/:title/:selectedRoom/:hora' element={<Seats />}/>
+            <Route path='/reserva/:id/:title/:selectedRoom/:ventana-emergente' element={<VentanaEmergente />}/>
           </Routes>
         </BrowserRouter>
       </StyledApp>
