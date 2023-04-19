@@ -95,7 +95,6 @@ const MovieReview = () => {
             ))}
           </ul>
         </div>
-
       )}
 
       <BackButton />

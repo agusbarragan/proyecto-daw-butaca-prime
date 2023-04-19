@@ -12,4 +12,9 @@ GOZ -> 2. He añadido una alerta en pantalla cuando le doy a "conseguir ticket" 
 
 ----- 4. He tocado algo de estilos también del componente StarRating.js en el textarea, las estrellas ,"Deja tu opinion" y los 2 botones: enviar y cancelar
 
+18 ABRIL 2O23
+-------------
+
+----- 1. Añadir a anularReserva.js las reservas del usuario logueado y que pueda borrarlas y se borren de firestore.
+----- 2. Ya he añadido la funcion anularReserva pero borra todos los documentos del usuario loguedao, y quiero que sea la reserva que desee.
 

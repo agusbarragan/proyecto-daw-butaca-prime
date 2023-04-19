@@ -91,8 +91,8 @@ export default function CinemaRoom() {
 
 
 
-             // const newWindow = window.open('', ' _blank');
-             // newWindow.document.write(reciboContent);
+             const newWindow = window.open('', ' _blank');
+             newWindow.document.write(reciboContent);
 
             // Abrir una nueva pestaña con el contenido del recibo
            

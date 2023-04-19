@@ -13,8 +13,8 @@ function NavigationBar() {
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar>
       <Nav className="ml-auto">
-        <Link to='/starrating' className='text-light p-4' style={{ textDecoration: 'none' }}>Películas</Link>
-        <Link to='' className='text-light p-4' style={{ textDecoration: 'none' }}>Opción 2</Link>
+        <Link to='/anularreserva' className='text-light p-4' style={{ textDecoration: 'none' }}>Reservas</Link>
+        <Link to='/starrating' className='text-light p-4' style={{ textDecoration: 'none' }}>Reseñas</Link>
         <Link to="/contacto" className='text-light p-4' style={{ textDecoration: 'none' }}>Contacto</Link>
       </Nav>
     </Navbar>
