@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BackButton from './BackButton';
 import NavigationBar from './Navbar';
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
-import firebaseApp from '../firebase-config';
+import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
+import firebaseApp, { auth } from '../firebase-config';
+import { deleteDoc } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 
 const MovieReview = () => {
 
@@ -12,6 +14,7 @@ const MovieReview = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [reviews, setReviews] = useState([]);
+  const [usuario, setUsuario] = useState(null);
 
   const handleStarClick = (index) => {
     setRating(index + 1);
@@ -58,12 +61,23 @@ const MovieReview = () => {
     );
   }
 
+
+  const handleDeleteClick = async (reviewId) => {
+    try {
+      setReviews(reviews.filter((review) => review !== reviewId));
+    } catch (error) {
+      console.error('Error deleting document: ', error);
+    }
+  };
+
+
   return (
     <>
     <NavigationBar />
     <div className="movie-review">
 
       <h2 className='text-light'>Deja tu opinión:</h2>
+      <h3 className='text-light'>Valóranos</h3>
 
       <div className="stars text-light display-6">{stars}</div>
 
@@ -84,11 +98,13 @@ const MovieReview = () => {
 
       {reviews.length > 0 && (
         <div className="reviews">
-          <h2 class='text-light'>Reseñas:</h2>
+          <h2 class='text-light'>Reseñas:</h2>          
           <ul>
             {reviews.map((review, index) => (
               <li class='list-unstyled' key={index}>
+                <p className='text-light float-end'>{auth.currentUser.email}</p>
                 <p class='container text-start text-light' style={{width:'100%'}}>{review.comment}</p>
+                <button class='btn btn-danger m-2' onClick={handleDeleteClick}>Borrar</button>
                 <p class='text-light'>Puntuación: {review.rating} estrellas</p>
                 <hr></hr>
               </li>

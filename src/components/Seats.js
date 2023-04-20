@@ -8,7 +8,6 @@ import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/fire
 import { useParams } from 'react-router-dom';
 import { VentanaEmergente } from './VentanaEmergente';
 
-
 export default function CinemaRoom() {
     const [seats, setSeats] = useState(new Array(60).fill(false)); // matriz de butacas
     const [selectedSeats, setSelectedSeats] = useState(0);
@@ -27,7 +26,22 @@ export default function CinemaRoom() {
 
         setSelectedSeats(selectedSeats + (newSeats[index] ? 1 : -1));
         setSelectedPrice(selectedPrice + (newSeats[index] ? 5 : -5));
+
+        const seatElement = document.getElementById(`seat-${index}`);
+        if (seatElement) {
+          if (newSeats[index]) {
+            seatElement.classList.add('seat-selected');
+            seatElement.disabled = true;
+          } else {
+            seatElement.classList.remove('seat-selected');
+            seatElement.disabled = false;
+          }
+        }
     };
+
+
+
+    
 
     //Guardar los recibos en la cloud firestore lo puede configurar gracias a este video
     // https://www.youtube.com/watch?v=8idyed4aJEA&t=58s
@@ -140,12 +154,13 @@ export default function CinemaRoom() {
             <p class='text-light d-flex align-content-end'>Precio: {selectedPrice}€</p>
             
             {selectedSeats === 0 ? <p>Seleccione las butacas que desea reservar</p> : <Button onClick={handleShow} className='m-2' id='botonRecibo'>Conseguir Ticket</Button>}
+            
                     <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Información</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Reserva realizada, disfrute de la pelicula.</p>
+                        <p>Reserva realizada, disfrute de la película.</p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => setShowModal(false)}>

@@ -4,6 +4,7 @@ import firebaseApp, { auth } from '../firebase-config'
 import { Button, Container } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import BackButton from '../components/BackButton';
+import NavigationBar from '../components/Navbar';
 
 export default function AnularReserva() {
     const db = getFirestore(firebaseApp);
@@ -40,6 +41,9 @@ export default function AnularReserva() {
     return (
         
     <Container>
+        
+        <NavigationBar />
+
         <h1 className='text-light'>Reservas</h1>
         <Button onClick={anularReserva} className='me-2'>Anular reserva</Button>
         <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -55,7 +59,7 @@ export default function AnularReserva() {
                         </Button>
                     </Modal.Footer>
                     </Modal>    
-                    
+
         <BackButton />
 
     </Container>

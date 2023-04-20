@@ -162,6 +162,12 @@ p.author a {
     border: 1px solid #ccc;
   }
 
+  .seat-selected {
+  background-color: #f0ad4e;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 
 
   /*.formularioLogueo button {
