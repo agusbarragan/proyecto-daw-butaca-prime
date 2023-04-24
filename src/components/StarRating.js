@@ -1,123 +1,88 @@
 import { useState, useEffect } from 'react';
-import BackButton from './BackButton';
-import NavigationBar from './Navbar';
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, onSnapshot, deleteDoc, doc, getFirestore } from 'firebase/firestore';
 import firebaseApp, { auth } from '../firebase-config';
-import { deleteDoc } from 'firebase/firestore';
-import { doc } from 'firebase/firestore';
+import NavigationBar from './Navbar';
+import BackButton from './BackButton';
 
-const MovieReview = () => {
-
-  //Tengo que añadir a cada caja de comentarios su usuario, que se guarden en la propia pagina los comentarios y poder borrarlos.
-  const db = getFirestore(firebaseApp);
-
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+function Reviews() {
   const [reviews, setReviews] = useState([]);
-  const [usuario, setUsuario] = useState(null);
+  const [newReview, setNewReview] = useState('');
 
-  const handleStarClick = (index) => {
-    setRating(index + 1);
-  };
+  const db = getFirestore(firebaseApp);
+  const usuario = auth.currentUser.email;
 
-  addDoc(collection(db, 'reseñas'),{
-    comentarios: comment,
-  })
-    
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
-  };
-
-  const handleCancelClick = () => {
-    setRating(0);
-    setComment('');
-  };
-
-  const handleSaveClick = () => {
-    if (rating === 0 || comment === '') {
+  const addReview = async (event) => {
+    event.preventDefault();
+    if (!newReview.trim()) {
+      alert('El comentario no puede estar en blanco');
       return;
     }
-
-    const newReview = {
-      rating,
-      comment,
-    };
-
-    setReviews([...reviews, newReview]);
-    setRating(0);
-    setComment('');
-  };
-
-  const stars = [];
-  for (let i = 0; i < 5; i++) {
-    stars.push(
-      <span
-        key={i}
-        className={i < rating ? 'star selected' : 'star'}
-        onClick={() => handleStarClick(i)}
-      >
-        ★
-      </span>
-    );
-  }
-
-
-  const handleDeleteClick = async (reviewId) => {
     try {
-      setReviews(reviews.filter((review) => review !== reviewId));
+      const docRef = await addDoc(collection(db, 'reseñas'), {
+        comentarios: newReview,
+        fecha: serverTimestamp(),
+        usuarioEmail: usuario,
+      });
+      console.log('Document written with ID: ', docRef.id);
+      setNewReview(''); // limpiamos el campo de entrada
     } catch (error) {
-      console.error('Error deleting document: ', error);
+      console.error('Error adding review: ', error);
     }
   };
-
+  
+  const deleteReview = async (id, reviewEmail) => {
+    if (usuario && usuario === reviewEmail) {
+      await deleteDoc(doc(db, 'reseñas', id));
+    } else {
+      alert("Usuario no autorizado para borrar esta reseña");
+    }
+  };
+  
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'reseñas'), (snapshot) => {
+      const newReviews = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        comentarios: doc.data().comentarios,
+        usuarioEmail: doc.data().usuarioEmail,
+      }));
+      setReviews(newReviews);
+    });
+    return unsubscribe;
+  }, [db]);
 
   return (
     <>
-    <NavigationBar />
-    <div className="movie-review">
+      <NavigationBar />
+      <div className='movie-review'>
+        <h1 className='text-light'>Comentarios</h1>
 
-      <h2 className='text-light'>Deja tu opinión:</h2>
-      <h3 className='text-light'>Valóranos</h3>
-
-      <div className="stars text-light display-6">{stars}</div>
-
-      <div className='d-flex justify-content-center align-items-center'>
-         <textarea
-        placeholder="Escribe tu reseña aquí"
-        value={comment}
-        onChange={handleCommentChange}
-        style={{maxWidth: '40%', justifyItems: 'center'}}
-        className='input-group'
-      />
-      </div>
-
-      <div className="buttons">
-        <button onClick={handleSaveClick} className='btn btn-primary me-2 mb-2'>Enviar</button>
-        <button onClick={handleCancelClick} className='btn btn-secondary me-2 mb-2'>Cancelar</button>
-      </div>
-
-      {reviews.length > 0 && (
-        <div className="reviews">
-          <h2 class='text-light'>Reseñas:</h2>          
-          <ul>
-            {reviews.map((review, index) => (
-              <li class='list-unstyled' key={index}>
-                <p className='text-light float-end'>{auth.currentUser.email}</p>
-                <p class='container text-start text-light' style={{width:'100%'}}>{review.comment}</p>
-                <button class='btn btn-danger m-2' onClick={handleDeleteClick}>Borrar</button>
-                <p class='text-light'>Puntuación: {review.rating} estrellas</p>
-                <hr></hr>
-              </li>
-            ))}
-          </ul>
+        <div className='d-flex justify-content-center align-items-center'>
+          <form onSubmit={addReview} className=''>
+            <input className='input-group' type="text" value={newReview} onChange={(e) => setNewReview(e.target.value)} placeholder='Escribe tu reseña aquí' />
+            <button type="submit" className='btn btn-primary'>Enviar</button>
+          </form>
         </div>
-      )}
 
+        <div className='d-flex justify-content-center'>
+            {reviews.map((review) => (
+              <div key={review.id} className='card my-2 w-25 m-2'>
+                
+                <div className='card-body'> 
+                 <p className='card-text'>{review.comentarios} {review.usuarioEmail}</p>
+                </div>
+
+                <div className='card-footer'>
+                    {review.usuarioEmail === usuario && (
+                      <button onClick={() => deleteReview(review.id, review.usuarioEmail)} className='btn btn-danger'>Eliminar</button>
+                )}                
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
       <BackButton />
-
-    </div>
     </>
   );
-};
+}
 
-export default MovieReview;
+export default Reviews;

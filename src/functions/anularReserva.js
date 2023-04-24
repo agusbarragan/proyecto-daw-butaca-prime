@@ -8,6 +8,17 @@ import NavigationBar from '../components/Navbar';
 
 export default function AnularReserva() {
     const db = getFirestore(firebaseApp);
+
+const docRef = doc(db, "recibos", "JCZVoU9fI4ElGY9bKjS6");
+const docSnap =  getDoc(docRef);
+
+if (docSnap) {
+  console.log("Document data:", docSnap);
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+
     const [showModal, setShowModal] = useState(false);
 
     /*const anularReserva = () => {

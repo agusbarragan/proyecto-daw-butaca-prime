@@ -166,8 +166,10 @@ p.author a {
   background-color: #f0ad4e;
   color: #fff;
   cursor: not-allowed;
-}
+  }
 
+
+  
 
 
   /*.formularioLogueo button {
