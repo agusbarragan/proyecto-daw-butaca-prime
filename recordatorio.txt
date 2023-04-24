@@ -2,21 +2,21 @@
 17 ABRIL 2023
 -------------
 
-GOZ -> 1. Tengo que añadir al StarRating.js la caja de comentarios con el usuario que ha escrito la reseña, poder borrarlos y que se guarden en la pagina cada vez
+GOZ (HECHO DIA 24) -> 1. Tengo que añadir al StarRating.js la caja de comentarios con el usuario que ha escrito la reseña, poder borrarlos y que se guarden en la pagina cada vez
 que entre o salga de ella.
 
 GOZ -> 2. He añadido una alerta en pantalla cuando le doy a "conseguir ticket" en Seats.js     LÍNEA 143 en Seats.js
 
 ----- 3. He creado VentanaEmergente.js pero no funciona hay que arreglarlo y poder recibir el ticket generado de alguna forma.
 
-GOZ -> 4. He tocado algo de estilos también del componente StarRating.js en el textarea, las estrellas ,"Deja tu opinion" y los 2 botones: enviar y cancelar
+GOZ (HECHO DIA 24) -> 4. He tocado algo de estilos también del componente StarRating.js en el textarea, las estrellas ,"Deja tu opinion" y los 2 botones: enviar y cancelar
 
 
 18 ABRIL 2O23
 -------------
 
------ 1. Añadir a anularReserva.js las reservas del usuario logueado y que pueda borrarlas y se borren de firestore.
------ 2. Ya he añadido la funcion anularReserva pero borra todos los documentos del usuario logueado, y quiero que sea la reserva que desee.
+GOZ (HECHO DIA 24) -> 1. Añadir a anularReserva.js las reservas del usuario logueado y que pueda borrarlas y se borren de firestore.
+GOZ (HECHO DIA 24) -> 2. Ya he añadido la funcion anularReserva pero borra todos los documentos del usuario logueado, y quiero que sea la reserva que desee.
 
 
 24 ABRIL 2023
@@ -24,3 +24,6 @@ GOZ -> 4. He tocado algo de estilos también del componente StarRating.js en el 
 
 GOZ -> 1. He cambiado StarRating entero y ahora ya puedo escribir reseñas y borrarlas con cada usuario que la haya escrito.
          Las reseñas las he metido en "card" como si estuvieran en cajas.
+
+GOZ -> 2. Hay modificar anularReserva que se vea la reserva su hora fecha, usuario, etc. y poder anular solo la reserva que tenga cada usuario
+          sin que otros vean la de los demas.
