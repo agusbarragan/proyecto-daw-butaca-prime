@@ -72,7 +72,7 @@ function Reviews() {
                 
                 <div className='card-body'> 
                  <p className='card-text'>{review.comentarios}</p>
-                 <p className='card-text'>{review.usuarioEmail}</p>
+                 <h6 className='card-title'>{review.usuarioEmail}</h6>
                 </div>
 
                 <div className='card-footer'>

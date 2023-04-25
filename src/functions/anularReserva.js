@@ -53,15 +53,15 @@ const AnularReservas = () => {
             <div key={recibo.id} className="col-md-4 mb-4">
                 <div className="card">
                     <div className="card-body">
-                    <h5 className="card-title">{recibo.email}</h5>
-                    <p className="card-text">Película: {recibo.nombrePelicula}</p>
+                    <h5 className="card-title">Película: {recibo.nombrePelicula}</h5>
+                    <p className="card-text">Email: {recibo.email}</p>
                     <p className="card-text">Butacas: {recibo.butacas}</p>
                     <p className="card-text">Hora reserva: {recibo.salaReservada.hora}</p>
                     <p className="card-text">Día: {recibo.fecha.toDate().toLocaleDateString()} a las {recibo.fecha.toDate().toLocaleTimeString()}</p>
-                    <p className="card-text">Total pagado: {recibo.precioReserva}</p>
+                    <h5 className="card-title">Total pagado: {recibo.precioReserva}</h5>
                 </div>
             <div className="card-footer">
-              <button onClick={() => anularReserva(recibo.id)} className="btn btn-danger">Anular reserva</button>
+              <button onClick={() => anularReserva(recibo.id)} className="btn btn-danger">Cancelar reserva</button>
             </div>
             </div>
             </div>

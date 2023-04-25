@@ -27,3 +27,8 @@ GOZ -> 1. He cambiado StarRating entero y ahora ya puedo escribir reseñas y bor
 
 GOZ -> 2. Hay modificar anularReserva que se vea la reserva su hora fecha, usuario, etc. y poder anular solo la reserva que tenga cada usuario
           sin que otros vean la de los demas.
+
+
+25 ABRIL 2023
+------------
+He editado la memoria del proyecto y he creado un manual de configuracion e instalación de la aplicación web, lo único que falta es añadir la informacion del recibo.
