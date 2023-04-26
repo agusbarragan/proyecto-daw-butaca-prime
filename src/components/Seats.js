@@ -7,6 +7,8 @@ import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { VentanaEmergente } from './VentanaEmergente';
+import jsPDF from 'jspdf';
+
 
 export default function CinemaRoom() {
     const [seats, setSeats] = useState(new Array(60).fill(false)); // matriz de butacas
@@ -77,59 +79,36 @@ export default function CinemaRoom() {
             });            
 
 
-            //Intentar exportarlo a una funcion para aplicar estilos
-            //Hacer tambien que cuando envie el recibo deshabilite las butacas seleccionadas
+            const generarPDF = () => {
+                const doc = new jsPDF({
+                    format: "a4",
 
-           const reciboContent = `
-                <html>
-                  <head>
-                    <title>Recibo ${nuevoNumeroRecibo}</title>
-                  </head>
-                  <body>
-                    <h1>Recibo ${nuevoNumeroRecibo}</h1>
-                    <div>
-                        <p>Fecha de reserva: ${fechaReserva.toLocaleDateString()} a las ${fechaReserva.toLocaleTimeString()}</p>
-                        <p>Nombre de la pelicula: ${title}</p>
-                        <p>Sala reservada: ${salaReserva.selectedRoom}</p>
-                        <p>Hora de reserva: ${horaReservada.hora}</p>
-                        <p>Butacas reservadas: ${butacasReservadas}</p>
-                        <p>Email del cliente: ${userEmail}</p>
-                        <p>Precio de reserva: ${selectedPrice} €</p>
-                    </div>
-                  </body>
-                </html>
-              `;
+                  });
 
-              //<VentanaEmergente nuevoNumeroRecibo={nuevoNumeroRecibo} title={title} horaReservada={horaReservada} />
-              
-
-
-
-             const newWindow = window.open('', ' _blank');
-             newWindow.document.write(reciboContent);
-
-            // Abrir una nueva pestaña con el contenido del recibo
-           
-
-
-            //Arreglar la suma de 1 en 1 cada vez que se envia un recibo a la base de datos, que el numeroRecibo sea 1, 2, 3, 4, etc...
-            //Añadir tambien una ventana emergente que muestre el recibo por ejemplo en pdf, con el precio, email, sala y butacas reservadas
-            //Añadir caja comentarios o de reseñas en el navbar seccion "Peliculas", donde salga el id del usuario  su valoración, etc. Con un input text-area
-            //donde el usuario pueda escribir una reseña sobre la pelicula
-
-            //set(ultimoReciboRef, { numeroRecibo: nuevoNumeroRecibo }, { merge: true });
-
-            // Remueve el listener
+                doc.setFont('Lato-Regular', 'normal');
+                doc.text(`Número de recibo: ${nuevoNumeroRecibo}`, 10, 10);
+                doc.text(`Email: ${userEmail}`, 10, 20);
+                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 30);
+                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 40);
+                doc.text(`Película: ${title}`, 10, 50);
+                doc.text(`Precio: ${selectedPrice} €`, 10, 60);
+                doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 70);
+                doc.save('ReciboReserva.pdf');
+            }
+            generarPDF();
 
             unsubscribe();
             
 
         })
     }
-    function handleShow() {
+    const handleShow = () => {
         setShowModal(true);
         saveReceipt();
-       }
+        
+    }
+
+   
     
     return (
         <Container>
