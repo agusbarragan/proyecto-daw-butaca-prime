@@ -5,10 +5,10 @@ import firebaseApp from "../firebase-config";
 import BackButton from "../components/BackButton";
 import NavigationBar from "../components/Navbar";
 
-
 const AnularReservas = () => {
     const [recibos, setRecibos] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [showAlert, setShowAlert] = useState(false);
+
 
     const db = getFirestore(firebaseApp);
     
@@ -21,27 +21,28 @@ const AnularReservas = () => {
             ...doc.data()
           }));
           setRecibos(data);
-          setLoading(false);
         });
         return unsubscribe;
       }, [db]);
       
       
     
-    const anularReserva = async (id) => {
+    const anularReserva = async (id) => {      
         try {
             console.log(doc);
-          await deleteDoc(doc(db, 'recibos', id));
+            setShowAlert(true); // Mostrar alerta
+            setTimeout(async () => {
+            await deleteDoc(doc(db, 'recibos', id));
           
           console.log("Reserva anulada con éxito");
+            }, 2000);
+ 
         } catch (error) {
           console.error("Error al anular la reserva", error);
         }
       };
           
-    if (loading) {
-      return <div>Cargando...</div>;
-    }
+
     
     return (
         <>
@@ -61,7 +62,19 @@ const AnularReservas = () => {
                     <h5 className="card-title">Total pagado: {recibo.precioReserva}</h5>
                 </div>
             <div className="card-footer">
-              <button onClick={() => anularReserva(recibo.id)} className="btn btn-danger">Cancelar reserva</button>
+
+                <button onClick={() => {
+                  setShowAlert(true);
+                  anularReserva(recibo.id);
+              }} className="btn btn-danger">Cancelar reserva</button>
+              {showAlert && (
+        <div className="alert alert-danger mt-2" role="alert">
+            ¿Está seguro de que desea cancelar esta reserva?
+            <button type="button" className="btn btn-secondary ml-2" onClick={() => setShowAlert(false)}>Cancelar</button>
+            <button type="button" className="btn btn-danger ml-2" onClick={() => anularReserva(recibo.id)}>Confirmar</button>
+        </div>
+              )}
+
             </div>
             </div>
             </div>

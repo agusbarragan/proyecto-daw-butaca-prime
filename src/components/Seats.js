@@ -88,11 +88,12 @@ export default function CinemaRoom() {
                 doc.setFont('Lato-Regular', 'normal');
                 doc.text(`Número de recibo: ${nuevoNumeroRecibo}`, 10, 10);
                 doc.text(`Email: ${userEmail}`, 10, 20);
-                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 30);
-                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 40);
-                doc.text(`Película: ${title}`, 10, 50);
-                doc.text(`Precio: ${selectedPrice} €`, 10, 60);
-                doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 70);
+                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 30);                
+                doc.text(`Hora de reserva: ${salaReserva.hora}`, 10, 40);
+                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 50);
+                doc.text(`Película: ${title}`, 10, 60);
+                doc.text(`Precio: ${selectedPrice} €`, 10, 70);
+                doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 80);
                 doc.save('ReciboReserva.pdf');
             }
             generarPDF();

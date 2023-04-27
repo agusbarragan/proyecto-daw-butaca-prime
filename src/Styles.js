@@ -99,12 +99,28 @@ body{
     width: 300px;
 }
 
-/* loading animation */
-@keyframes spinner {
-    to  {
-        transform: rotate(360deg);
-    }
-}
+/* loading animation 
+@keyframes spin {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+
+
+.spinner {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .img {
+   height: 150px;
+   animation: spin 2.5s linear infinite;
+ }*/
 
 
 p.author {
