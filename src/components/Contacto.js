@@ -11,7 +11,7 @@ const Contacto = () => {
       <Container  className="container text-start col-6">
         <Row>
           <Col>
-            <h2 class="text-light text-center mb-3">Sobre Nosotros</h2>
+            <h1 class="text-light text-center mb-3">Sobre Nosotros</h1>
             <p class="text-light">
               Bienvenidos a nuestra página web de reserva de butacas de cine.
               Nos dedicamos a ofrecer una experiencia única y cómoda a nuestros

@@ -3,10 +3,13 @@ import { collection, addDoc, serverTimestamp, onSnapshot, deleteDoc, doc, getFir
 import firebaseApp, { auth } from '../firebase-config';
 import NavigationBar from './Navbar';
 import BackButton from './BackButton';
+import { Button, Modal } from 'react-bootstrap';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState(null);
 
   const db = getFirestore(firebaseApp);
   const usuario = auth.currentUser.email;
@@ -30,16 +33,20 @@ function Reviews() {
     }
   };
   
-  const deleteReview = async (id, reviewEmail) => {
+  const handleShowModal = (id, reviewEmail) => {
     if (usuario && usuario === reviewEmail) {
-       const confirmDelete = window.confirm("¿Quiere borrar su reseña?");
-      if (confirmDelete) {
-        await deleteDoc(doc(db, 'reseñas', id));  
-      }
-    } else {
+      setReviewToDelete({ id, reviewEmail });
+      setShowModal(true);
+    }else{
       alert("Usuario no autorizado para borrar esta reseña");
     }
-  };
+  }
+
+  const handleDelete = async () => {
+        await deleteDoc(doc(db, 'reseñas', reviewToDelete.id));  
+        setShowModal(false);
+        setReviewToDelete(null);
+    }
   
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'reseñas'), (snapshot) => {
@@ -62,24 +69,47 @@ function Reviews() {
         <div className='d-flex justify-content-center align-items-center'>
           <form onSubmit={addReview} className=''>
             <input className='input-group' type="text" value={newReview} onChange={(e) => setNewReview(e.target.value)} placeholder='Escribe tu reseña aquí' />
-            <button type="submit" className='btn btn-primary'>Enviar</button>
+            <button type="submit" className='btn btn-primary mb-2'>Enviar</button>
           </form>
         </div>
 
-        <div className='d-flex justify-content-center'>
+        <div className='row'>
             {reviews.map((review) => (
-              <div key={review.id} className='card my-2 w-25 m-2'>
+              <div key={review.id} className='col-md-4 mb-4'>
+                <div className='card'>
+                  <div className='card-body'> 
+                  <p className='card-text'>{review.comentarios}</p>
+                  <h6 className='card-title'>{review.usuarioEmail}</h6>
+                  </div>
                 
-                <div className='card-body'> 
-                 <p className='card-text'>{review.comentarios}</p>
-                 <h6 className='card-title'>{review.usuarioEmail}</h6>
-                </div>
 
                 <div className='card-footer'>
-                    {review.usuarioEmail === usuario && (
-                      <button onClick={() => deleteReview(review.id, review.usuarioEmail)} className='btn btn-danger'>Eliminar</button>
-                )}                
+                  <Modal show={showModal} onHide={() => setShowModal(false)}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Confirmar eliminación de reseña</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      ¿Quiere borrar la reseña?
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant='secondary' onClick={() => setShowModal(false)}>
+                        VOLVER
+                      </Button>
+                      <Button variant='danger' onClick={() => handleDelete() }>
+                        SI
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                     {review.usuarioEmail === usuario && (
+                      <Button variant='danger' onClick={() => handleShowModal(review.id, review.usuarioEmail)}>
+                        Eliminar
+                      </Button>
+                )}    
                 </div>
+
+                </div>
+                             
+                
               </div>
             ))}
         </div>

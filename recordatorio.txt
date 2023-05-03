@@ -32,3 +32,42 @@ GOZ -> 2. Hay modificar anularReserva que se vea la reserva su hora fecha, usuar
 25 ABRIL 2023
 ------------
 He editado la memoria del proyecto y he creado un manual de configuracion e instalación de la aplicación web, lo único que falta es añadir la informacion del recibo.
+
+
+
+3 MAYO 2023
+-----------
+GOZ -> 1. He añadido el cartel modal tanto a anularReserva.js como a Review.js cuando le damos a cancelar reserva o eliminar reseña
+          aparecera el cartel, funcionando correctamente.
+
+------ 2. Solo falta que las butacas al seleccionarlas y pagar se desactiven para que no vuelvan a seleccionarse.
+       Y darle un poco de formato al recibo en PDF.
+
+------ 3. Y editar la memoria con las cosas nuevas.
+
+
+
+
+
+
+
+
+por si me fallara el div de Review.js al final del todo
+
+<div className='d-flex justify-content-center'>
+            {reviews.map((review) => (
+              <div key={review.id} className='card my-2 w-25 m-2'>
+                
+                <div className='card-body'> 
+                 <p className='card-text'>{review.comentarios}</p>
+                 <h6 className='card-title'>{review.usuarioEmail}</h6>
+                </div>
+
+                <div className='card-footer'>
+                    {review.usuarioEmail === usuario && (
+                      <button onClick={() => deleteReview(review.id, review.usuarioEmail)} className='btn btn-danger'>Eliminar</button>
+                )}                
+                </div>
+              </div>
+            ))}
+        </div>

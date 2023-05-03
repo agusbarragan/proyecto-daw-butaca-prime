@@ -6,7 +6,6 @@ import firebaseApp from '../firebase-config';
 import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-import { VentanaEmergente } from './VentanaEmergente';
 import jsPDF from 'jspdf';
 
 
@@ -18,10 +17,13 @@ export default function CinemaRoom() {
     const selectedRoom = useParams();  //Accedo a la url que esta en MovieRooms.js y luego esta variable la paso a la constante salaReserva y la leo en el document.write salaReserva.selectedRoom
     const horaReservada = useParams();
     const [showModal, setShowModal] = useState(false);
+    const [isSold, setIsSold] = useState(false);
+    
 
     const db = getFirestore(firebaseApp);
 
     const toggleSeat = (index) => { // función para cambiar el estado de la butaca al hacer clic
+        if (isSold) return;
         const newSeats = [...seats];
         newSeats[index] = !newSeats[index];
         setSeats(newSeats);
@@ -103,10 +105,17 @@ export default function CinemaRoom() {
 
         })
     }
+
+
+
     const handleShow = () => {
         setShowModal(true);
+        setIsSold(true);
+        const seatElements = document.querySelectorAll(".seat-selected");
+        seatElements.forEach((seatElement) => {
+            seatElement.disabled = true;
+        })
         saveReceipt();
-        
     }
 
    

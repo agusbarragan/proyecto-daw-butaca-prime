@@ -4,10 +4,12 @@ import { auth } from "../firebase-config";
 import firebaseApp from "../firebase-config";
 import BackButton from "../components/BackButton";
 import NavigationBar from "../components/Navbar";
+import { Modal, Button } from "react-bootstrap";
 
 const AnularReservas = () => {
     const [recibos, setRecibos] = useState([]);
-    const [showAlert, setShowAlert] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
 
 
     const db = getFirestore(firebaseApp);
@@ -21,28 +23,29 @@ const AnularReservas = () => {
             ...doc.data()
           }));
           setRecibos(data);
+          setLoading(false);
         });
         return unsubscribe;
       }, [db]);
       
       
     
-    const anularReserva = async (id) => {      
+      const anularReserva = async (id) => {
         try {
-            console.log(doc);
-            setShowAlert(true); // Mostrar alerta
-            setTimeout(async () => {
             await deleteDoc(doc(db, 'recibos', id));
+            setShowModal(false);
+            console.log("Reserva anulada con éxito");
           
-          console.log("Reserva anulada con éxito");
-            }, 2000);
- 
         } catch (error) {
           console.error("Error al anular la reserva", error);
         }
       };
+      
           
 
+    if (loading) {
+      return <div>Cargando...</div>;
+    }
     
     return (
         <>
@@ -62,25 +65,35 @@ const AnularReservas = () => {
                     <h5 className="card-title">Total pagado: {recibo.precioReserva}</h5>
                 </div>
             <div className="card-footer">
-
-                <button onClick={() => {
-                  setShowAlert(true);
-                  anularReserva(recibo.id);
-              }} className="btn btn-danger">Cancelar reserva</button>
-              {showAlert && (
-        <div className="alert alert-danger mt-2" role="alert">
-            ¿Está seguro de que desea cancelar esta reserva?
-            <button type="button" className="btn btn-secondary ml-2" onClick={() => setShowAlert(false)}>Cancelar</button>
-            <button type="button" className="btn btn-danger ml-2" onClick={() => anularReserva(recibo.id)}>Confirmar</button>
-        </div>
-              )}
-
+                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Confirmar cancelación de reserva</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    ¿Está seguro de que desea cancelar esta reserva?
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                      VOLVER
+                    </Button>
+                    <Button variant="danger" onClick={() => anularReserva(recibo.id)}>
+                      SI
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+                    <Button variant="danger" onClick={() => setShowModal(true)}>
+                      Cancelar reserva
+                    </Button>
+                
             </div>
             </div>
             </div>
           ))}
         </div>
       </div>
+
+      
+
         <BackButton />
       </>
     );
