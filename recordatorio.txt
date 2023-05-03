@@ -45,7 +45,8 @@ GOZ -> 1. He añadido el cartel modal tanto a anularReserva.js como a Review.js 
 
 ------ 3. Y editar la memoria con las cosas nuevas.
 
-
+------ 4. En Seats.js modifique para que al darle a "conseguir ticket" bloqueara las butacas y no poder volver
+          a seleccionarlas. ESTA MAL HAY QUE MODIFICARLO
 
 
 
