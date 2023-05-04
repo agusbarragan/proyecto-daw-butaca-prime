@@ -8,7 +8,6 @@ import { Modal, Button } from "react-bootstrap";
 
 const AnularReservas = () => {
     const [recibos, setRecibos] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
 
 
@@ -23,7 +22,6 @@ const AnularReservas = () => {
             ...doc.data()
           }));
           setRecibos(data);
-          setLoading(false);
         });
         return unsubscribe;
       }, [db]);
@@ -40,12 +38,6 @@ const AnularReservas = () => {
           console.error("Error al anular la reserva", error);
         }
       };
-      
-          
-
-    if (loading) {
-      return <div>Cargando...</div>;
-    }
     
     return (
         <>

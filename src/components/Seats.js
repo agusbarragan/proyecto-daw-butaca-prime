@@ -7,6 +7,9 @@ import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import jsPDF from 'jspdf';
+import Contacto from './Contacto';
+import { QRCodeComponent } from './QRCodeComponent';
+import QRCode from 'react-qr-code';
 
 
 export default function CinemaRoom() {
@@ -17,13 +20,11 @@ export default function CinemaRoom() {
     const selectedRoom = useParams();  //Accedo a la url que esta en MovieRooms.js y luego esta variable la paso a la constante salaReserva y la leo en el document.write salaReserva.selectedRoom
     const horaReservada = useParams();
     const [showModal, setShowModal] = useState(false);
-    const [isSold, setIsSold] = useState(false);
     
 
     const db = getFirestore(firebaseApp);
 
     const toggleSeat = (index) => { // función para cambiar el estado de la butaca al hacer clic
-        if (isSold) return;
         const newSeats = [...seats];
         newSeats[index] = !newSeats[index];
         setSeats(newSeats);
@@ -82,27 +83,33 @@ export default function CinemaRoom() {
 
 
             const generarPDF = () => {
+                
                 const doc = new jsPDF({
                     format: "a4",
-
                   });
 
                 doc.setFont('Lato-Regular', 'normal');
-                doc.text(`Número de recibo: ${nuevoNumeroRecibo}`, 10, 10);
-                doc.text(`Email: ${userEmail}`, 10, 20);
-                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 30);                
-                doc.text(`Hora de reserva: ${salaReserva.hora}`, 10, 40);
-                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 50);
-                doc.text(`Película: ${title}`, 10, 60);
-                doc.text(`Precio: ${selectedPrice} €`, 10, 70);
+                doc.setFontSize(22);
+                doc.text('Butaca Reserve', 105, 8, 'center');
+                doc.text(' ', 10, 10);
+                doc.setFontSize(16);
+                doc.text(`Número de recibo: ${nuevoNumeroRecibo}`, 10, 20);
+                doc.text(`Email: ${userEmail}`, 10, 30);
+                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 40);                
+                doc.text(`Hora de reserva: ${salaReserva.hora}`, 10, 50);
+                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 60);
+                doc.text(`Película: ${title}`, 10, 70);
                 doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 80);
+                doc.text(`Precio: ${selectedPrice} €`, 10, 90);
+                
                 doc.save('ReciboReserva.pdf');
+             
             }
+
             generarPDF();
 
             unsubscribe();
             
-
         })
     }
 
@@ -110,11 +117,6 @@ export default function CinemaRoom() {
 
     const handleShow = () => {
         setShowModal(true);
-        setIsSold(true);
-        const seatElements = document.querySelectorAll(".seat-selected");
-        seatElements.forEach((seatElement) => {
-            seatElement.disabled = true;
-        })
         saveReceipt();
     }
 
