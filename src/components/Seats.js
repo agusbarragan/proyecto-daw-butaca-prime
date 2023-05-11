@@ -7,9 +7,7 @@ import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import jsPDF from 'jspdf';
-import Contacto from './Contacto';
-import { QRCodeComponent } from './QRCodeComponent';
-import QRCode from 'react-qr-code';
+import QRcode from 'qrcode.react';
 
 
 export default function CinemaRoom() {
@@ -18,9 +16,7 @@ export default function CinemaRoom() {
     const { title } = useParams();
     const [selectedPrice, setSelectedPrice] = useState(0);
     const selectedRoom = useParams();  //Accedo a la url que esta en MovieRooms.js y luego esta variable la paso a la constante salaReserva y la leo en el document.write salaReserva.selectedRoom
-    const horaReservada = useParams();
     const [showModal, setShowModal] = useState(false);
-    
 
     const db = getFirestore(firebaseApp);
 
@@ -45,9 +41,6 @@ export default function CinemaRoom() {
     };
 
 
-
-    
-
     //Guardar los recibos en la cloud firestore lo puede configurar gracias a este video
     // https://www.youtube.com/watch?v=8idyed4aJEA&t=58s
 
@@ -68,7 +61,6 @@ export default function CinemaRoom() {
             const ultimoNumeroRecibo = ultimoRecibo ? ultimoRecibo.numeroRecibo : 0;
 
             const nuevoNumeroRecibo = ultimoNumeroRecibo + 1;
-            const fechaReserva = new Date();
 
             // Guardar el recibo en la base de datos de Firebase
             addDoc(collection(db, "recibos"), {
@@ -81,37 +73,45 @@ export default function CinemaRoom() {
                 fecha: new Date(),
             });            
 
-
             const generarPDF = () => {
                 
                 const doc = new jsPDF({
                     format: "a4",
+                    orientation: 'landscape',
+                    unit: 'mm',
                   });
+                
+                const base64Image = document.getElementById('qrcode').toDataURL();
 
                 doc.setFont('Lato-Regular', 'normal');
                 doc.setFontSize(22);
-                doc.text('Butaca Reserve', 105, 8, 'center');
-                doc.text(' ', 10, 10);
+                doc.text('Butaca Reserve', 150, 15, 'center');
+                doc.text(' ', 10, 25);
                 doc.setFontSize(16);
-                doc.text(`Número de recibo: ${nuevoNumeroRecibo}`, 10, 20);
-                doc.text(`Email: ${userEmail}`, 10, 30);
-                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 40);                
-                doc.text(`Hora de reserva: ${salaReserva.hora}`, 10, 50);
-                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 60);
-                doc.text(`Película: ${title}`, 10, 70);
-                doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 80);
-                doc.text(`Precio: ${selectedPrice} €`, 10, 90);
-                
+                doc.text(`Número de recibo: ${nuevoNumeroRecibo}`, 10, 55);
+                doc.text(`Email: ${userEmail}`, 10, 65);
+                doc.text(`Sala reservada: ${salaReserva.selectedRoom}`, 10, 75);                
+                doc.text(`Hora de reserva: ${salaReserva.hora}`, 10, 85);
+                doc.text(`Nº butaca reservada: ${butacasReservadas}`, 10, 95);
+                doc.text(`Película: ${title}`, 10, 105);
+                doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 115);
+                doc.text(`Precio: ${selectedPrice} €`, 10, 125);
+                doc.addImage(base64Image, 'png', 190, 65);
+                doc.text('Valide su entrada en taquilla.', 175, 107);
+                doc.text('Gracias.', 197, 115);
+                doc.setFontSize(9);
+                doc.text('© Todos los derechos reservados', 10, 190);
+                doc.text('Butaca Reserve', 260, 190);
                 doc.save('ReciboReserva.pdf');
-             
             }
-
+            
             generarPDF();
 
             unsubscribe();
             
         })
     }
+    
 
 
 
@@ -143,7 +143,8 @@ export default function CinemaRoom() {
 
             <p class='text-light d-flex flex-row'>Butacas seleccionadas: {selectedSeats}</p>
             <p class='text-light d-flex align-content-end'>Precio: {selectedPrice}€</p>
-            
+            <QRcode hidden value = {'https://butacareserve.com'} id = 'qrcode'/>
+
             {selectedSeats === 0 ? <p>Seleccione las butacas que desea reservar</p> : <Button onClick={handleShow} className='m-2' id='botonRecibo'>Conseguir Ticket</Button>}
             
                     <Modal show={showModal} onHide={() => setShowModal(false)}>

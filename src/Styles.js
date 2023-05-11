@@ -185,7 +185,15 @@ p.author a {
   }
 
 
-  
+  .btn-floating {
+ 
+
+  border-radius: 50%;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
   /*.formularioLogueo button {

@@ -4,6 +4,7 @@ import firebaseApp, { auth } from '../firebase-config';
 import NavigationBar from './Navbar';
 import BackButton from './BackButton';
 import { Button, Modal } from 'react-bootstrap';
+import { Footer } from './Footer';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -115,6 +116,7 @@ function Reviews() {
         </div>
       </div>
       <BackButton />
+      <Footer />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FaEnvelope, FaInstagram, FaTwitter } from "react-icons/fa";
 import BackButton from "./BackButton";
 import NavigationBar from "./Navbar";
+import { Footer } from "./Footer";
 
 const Contacto = () => {
   return (
@@ -90,6 +91,7 @@ const Contacto = () => {
       </Container>
 
       <BackButton />
+      <Footer />
     </>
   );
 };

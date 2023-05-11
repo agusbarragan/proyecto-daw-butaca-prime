@@ -5,6 +5,7 @@ import firebaseApp from "../firebase-config";
 import BackButton from "../components/BackButton";
 import NavigationBar from "../components/Navbar";
 import { Modal, Button } from "react-bootstrap";
+import { Footer } from "../components/Footer";
 
 const AnularReservas = () => {
     const [recibos, setRecibos] = useState([]);
@@ -87,6 +88,8 @@ const AnularReservas = () => {
       
 
         <BackButton />
+        <Footer/>
+
       </>
     );
   };

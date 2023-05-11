@@ -53,6 +53,36 @@ GOZ -> 1. He añadido el cartel modal tanto a anularReserva.js como a Review.js 
 ------- 1. Generar el QRCode en el pdf sera con html-image-react o algo asi era, a ver si funciona
 
 
+8 MAYO 2023
+-----------
+GOZ ->  1. Falta generar QRcode 
+------- 2. y bloquear butacas al reservar.
+
+9 MAYO 2023
+-----------
+------ 1. He instalado estas dos librerias de iconos para Footer.js y he añadido a Styles.js .btn-floating
+          npm i --save @fortawesome/free-brands-svg-icons
+          npm install --save @fortawesome/react-fontawesome
+
+------ 2. Falta generar QRcode y bloquear butacas al reservar.
+
+
+11 MAYO 2023
+------------
+GOZ -> 1. Ya hice funcionar el QRcode con la libreria qrcode.react y la añadi como imagen al jsPDF, por fin.
+
+------ 2. Falta bloquear butacas al reservar y ya estaría terminado el proyecto.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,3 +105,108 @@ por si me fallara el div de Review.js al final del todo
               </div>
             ))}
         </div>
+
+
+
+
+
+
+
+        $sql = "SELECT kilometros
+		, peso
+		, precio
+		FROM {$DBT['agustin_usuarios_pedidos_portes_distancia']}
+";
+
+$RESULT = _DB_QUERY($sql);
+
+if (_DB_COUNT($RESULT)) {
+	$FORM = _DB_RESULT($RESULT);
+}
+
+
+
+
+
+FORMULARIO DE PORTES:
+
+<?php 
+
+$WIN_CFG['title'] = 'Formulario de portes';
+$WIN_CFG['width'] = 800;
+$WIN_CFG['height'] = 500;
+
+
+$sql = "SELECT kilometros
+		, peso
+		, precio
+		FROM {$DBT['agustin_usuarios_pedidos_portes_distancia']}
+";
+
+$RESULT = _DB_QUERY($sql);
+$PORTES = [];
+
+
+
+$KILOMETROS	= [];
+$PESOS		= [];
+
+
+if (_DB_COUNT($RESULT)) {
+	while ($FORM = mysqli_fetch_array($RESULT)) {
+		$PORTES[$FORM['kilometros']][$FORM['peso']] = $FORM['precio'];
+		$KILOMETROS[]	= $FORM['kilometros'];
+		$PESOS[]		= $FORM['peso'];
+	}
+	$FORM = _DB_RESULT($RESULT);
+}
+
+
+$JSON = _JSON_ENCODE($PORTES);
+
+
+
+echo '<table>';
+
+	echo '<thead>';
+		echo '<th>#</th>';
+		echo '<th colspan="' . count($KILOMETROS) . '">kilometros</th>';
+	echo '</thead>';
+	
+	echo '<tr>';
+	echo '<td></td>';
+		foreach( $KILOMETROS as $kilometro ){
+			echo '<th>'.$kilometro.'</th>';
+		}
+	echo '</tr>';
+
+	echo '<tbody>';
+		foreach( $PESOS as $peso ){
+			echo '<tr>';
+				echo '<td>'.$peso.'</td>';
+				foreach( $KILOMETROS as $kilometro ){
+					$precio = $PORTES[$kilometro][$peso];
+					echo '<td><input type="text" value="'.$precio.'"></td>';
+				}
+			echo '</tr>';
+		}
+	echo '</tbody>';
+
+
+
+
+echo '</table>';
+
+
+
+
+
+
+
+PORTES_ARRAY.forEach(function(porte) {
+  table += '<tr>';
+  table += '<td>' + porte.kilometros + '</td>';
+  table += '<td>' + porte.peso + '</td>';
+  table += '<td>' + porte.precio + '</td>';
+  table += '</tr>';
+});
