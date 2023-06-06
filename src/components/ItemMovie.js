@@ -3,10 +3,13 @@ import DefaultImage from "../../src/NoImage.png";
 import { Link } from 'react-router-dom';
 
 function ItemMovie(props) {
+    // Definos los props con los valores de id, title, type, year, poster
+    // de OMDB API
     const { id, title, type, year, poster } = props;
 
-    let image = poster === "N/A" ? DefaultImage : poster;
-
+    // Si el valor es n/a saldra la imagen por defecto, sino aparece el poster
+    // de la pelicula
+    let image = poster === "N/A" ? DefaultImage : poster; 
 
     return (
         <Link to={`/movies/${id}/${title}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>  {/**Link que lleva a la pelicula con su id en la barra del navegador */}

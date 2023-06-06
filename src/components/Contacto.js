@@ -8,6 +8,7 @@ import { Footer } from "./Footer";
 const Contacto = () => {
   return (
     <>
+    {/* Importo el menu de navegacion y creo los parrafos para el componente Contacto */}
       <NavigationBar />
       <Container  className="container text-start col-6">
         <Row>
@@ -50,48 +51,13 @@ const Contacto = () => {
               contacto con nosotros. Puedes encontrarnos en las siguientes redes
               sociales:
             </p>
-            <ul className="list-group list-group-horizontal list-unstyled justify-content-center mb-2">
-              <li>
-                <button className="btn btn-light m-2">
-                  <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-decoration-none"
-                  >
-                    <FaInstagram /> Instagram
-                  </a>
-                </button>
-              </li>
-              <li>
-                <button className="btn btn-light m-2">
-                  <a
-                    href="https://twitter.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-decoration-none"
-                  >
-                    <FaTwitter /> Twitter
-                  </a>
-                </button>
-              </li>
-              <li>
-                <button className="btn btn-light m-2">
-                  <a
-                    href="mailto:info@tupagina.com"
-                    className="text-decoration-none"
-                  >
-                    <FaEnvelope /> reservebutaca@gmail.com
-                  </a>
-                </button>
-              </li>
-            </ul>
+           
           </Col>
         </Row>
       </Container>
 
+      <Footer />      
       <BackButton />
-      <Footer />
     </>
   );
 };

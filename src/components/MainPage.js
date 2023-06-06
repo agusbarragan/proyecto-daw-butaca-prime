@@ -8,7 +8,12 @@ import { Footer } from './Footer';
 const MainPage = () => {
     return (
         <>
+        {/* Con DataProvider se proporciona datos a los componentes hijos
+            lo que permite acceder a los datos
+        */}
             <DataProvider>
+                {/* Y renderizamos estos 4 componentes, 
+                es la pantalla principal del buscador de peliculas */}
                 <NavigationBar />
                 <FormSearch />
                 <Movies />

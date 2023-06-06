@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 
 function NavigationBar() {
+  // Creo el navBar para la aplicacion
   return (
 <div className="d-flex justify-content-center">
   <Navbar class="navbar navbar-expand-lg navbar-dark shadow-5-strong">

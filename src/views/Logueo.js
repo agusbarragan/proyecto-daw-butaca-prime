@@ -31,7 +31,7 @@ const Logueo = () => {
     return (
         <>
             <div class="container mt-5">
-                <h1 class="text-center display-4 text-light">Butaca Reserve</h1>
+                <h1 class="text-center display-4 text-light">Butaca Prime</h1>
             </div>
             <div className='divLogueo'>
                 {showResetPassword ? (
@@ -49,7 +49,7 @@ const Logueo = () => {
 
                             <label htmlFor="passwordField">Contraseña</label>
                             <input type="password" id="contrasena" placeholder='Contraseña' />
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between flex-column">
                                 <div class="btn-group" role="group">
                                     <button type="submit" class="btn btn-dark m-2 rounded">
                                         {" "}

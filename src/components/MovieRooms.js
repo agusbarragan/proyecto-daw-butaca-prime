@@ -7,8 +7,12 @@ import salaCine3 from "../images/salaCine3.png";
 import BackButton from './BackButton';
 
 function MovieRooms() {
-  const { id, title } = useParams();  // Obtiene la id de la película desde los parámetros de la URL
-  const [selectedRoom, setSelectedRoom] = useState('');
+  // Obtiene la id de la película desde los parámetros de la URL
+  const { id, title } = useParams();  
+
+  // Creo dos estados selectedRoom y horaReservada, 
+  // que almacenan la sala seleccioanda y la hora reservada respectivamente
+  const [selectedRoom, setSelectedRoom] = useState(''); 
   const [horaReservada, setHoraReservada] = useState('');
 
   function handleSelectRoomAndHour(room, hora) {
@@ -37,7 +41,8 @@ function MovieRooms() {
   }*/
 
   return (
-    <>    
+    <>
+    {/* Creo las tres salas disponibles  */}
     <Container className="my-5">
       <h2 className="text-center text-light mb-5">Salas disponibles</h2>
       <Row>

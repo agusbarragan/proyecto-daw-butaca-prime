@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import { useFetch } from "../hooks/useFetch";
-
+//
 export const DataContext = createContext();   // createContext metodo de react
 
 export const DataProvider = ({ children }) => { //recibe el atributo children

@@ -10,7 +10,7 @@ import { Footer } from "../components/Footer";
 const AnularReservas = () => {
     const [recibos, setRecibos] = useState([]);
     const [showModal, setShowModal] = useState(false);
-
+    const [showModalMap, setShowModalMap] = useState({});
 
     const db = getFirestore(firebaseApp);
     
@@ -31,6 +31,8 @@ const AnularReservas = () => {
     
       const anularReserva = async (id) => {
         try {
+          console.log("ID de la reserva a anular:", id);
+
             await deleteDoc(doc(db, 'recibos', id));
             setShowModal(false);
             console.log("Reserva anulada con éxito");
@@ -58,7 +60,9 @@ const AnularReservas = () => {
                     <h5 className="card-title">Total pagado: {recibo.precioReserva}</h5>
                 </div>
             <div className="card-footer">
-                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal show={showModalMap[recibo.id]} onHide={() => setShowModalMap({ ...showModalMap, [recibo.id]: false })}
+                
+                >
                   <Modal.Header closeButton>
                     <Modal.Title>Confirmar cancelación de reserva</Modal.Title>
                   </Modal.Header>
@@ -66,15 +70,19 @@ const AnularReservas = () => {
                     ¿Está seguro de que desea cancelar esta reserva?
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    <Button variant="secondary" onClick={() => setShowModalMap(false)}>
                       VOLVER
                     </Button>
-                    <Button variant="danger" onClick={() => anularReserva(recibo.id)}>
+                    <Button variant="danger" onClick={() => {
+                    anularReserva(recibo.id);
+                    setShowModalMap({ ...showModalMap, [recibo.id]: false });
+                  }}>
                       SI
                     </Button>
                   </Modal.Footer>
                 </Modal>
-                    <Button variant="danger" onClick={() => setShowModal(true)}>
+                    <Button variant="danger" onClick={() => setShowModalMap({ ...showModalMap, [recibo.id]: true })}
+              >
                       Cancelar reserva
                     </Button>
                 
@@ -84,8 +92,6 @@ const AnularReservas = () => {
           ))}
         </div>
       </div>
-
-      
 
         <BackButton />
         <Footer/>

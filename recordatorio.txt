@@ -74,6 +74,20 @@ GOZ -> 1. Ya hice funcionar el QRcode con la libreria qrcode.react y la añadi c
 ------ 2. Falta bloquear butacas al reservar y ya estaría terminado el proyecto.
 
 
+01 JUNIO 2023
+------------
+GOZ -> 1. He modificado anularReserva que al anular una reserva me borraba siempre la ultima daba igual cual
+       eligiera. Ahora ya funciona bien y anula la que se elija.
+
+GOZ -> 2. He modificado tambien Seats.js en la parte de generarPDF, lo he pasado a un componente nuevo, donde lo genera
+          para ahorrar codigo y quede más claro, le paso las propiedades en Seats.js y funciona correctamente generando
+          tambien el codigoQR.
+
+6 JUNIO 2023
+-----------
+        1. He comentado el codigo, me falta poco por comentar ya.
+        2. He acualizado el fondo de la aplicacion con otro svg, de color azul.
+        3. He borrado componentes antiguos que no servian para nada.
 
 
 
@@ -105,6 +119,62 @@ por si me fallara el div de Review.js al final del todo
               </div>
             ))}
         </div>
+
+
+debajo de la col: "si tiene alguna duda o tal pongase en contacto con nosotros:" lo he quitado para
+dejar el otro mejor con twitter y eso
+
+ <ul className="list-group list-group-horizontal list-unstyled justify-content-center mb-2">
+              <li>
+                <button className="btn btn-light m-2">
+                  <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none"
+                  >
+                    <FaInstagram /> Instagram
+                  </a>
+                </button>
+              </li>
+              <li>
+                <button className="btn btn-light m-2">
+                  <a
+                    href="https://twitter.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none"
+                  >
+                    <FaTwitter /> Twitter
+                  </a>
+                </button>
+              </li>
+              <li>
+                <button className="btn btn-light m-2">
+                  <a
+                    href="mailto:info@tupagina.com"
+                    className="text-decoration-none"
+                  >
+                    <FaEnvelope /> reservebutaca@gmail.com
+                  </a>
+                </button>
+              </li>
+            </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,10 +6,11 @@ const Movies = () => {
     const { isLoading, data } = useContext(DataContext);
 
     return (
-        <div className="movies-content">   {/**Si el loading no esta cargando muestrame los dato de la pelicula sino lo muestra vacio */}
+        <div className="movies-content">   
+        {/**Si el loading no esta cargando muestrame los datos de la pelicula sino lo muestra vacio */}
             {
                 !isLoading ?
-                data.filter(item => item.Year === "2022").map(filteredItem => (
+                data.filter(item => item.Year === "2023").map(filteredItem => (
                     <ItemMovie
                         key={filteredItem.imdbID}
                         id={filteredItem.imdbID}

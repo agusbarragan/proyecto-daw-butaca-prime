@@ -12,7 +12,6 @@ import MovieRooms from './components/MovieRooms';
 import Contacto from './components/Contacto';
 import Seats from './components/Seats';
 import Review from './components/Review';
-import { VentanaEmergente } from './components/VentanaEmergente';
 import AnularReservas from './functions/anularReserva';
 
 function App() {
@@ -37,9 +36,15 @@ function App() {
         </div>
       )}
       {usuario ? <Home /> : <Logueo />}
+
       <StyledApp>
         <GlobalStyled />
+
         <BrowserRouter>
+        {/* Es como una plantilla principal de la web  */}
+
+        {/* Cargamos los componentes que coinciden con el path */}
+
           <Routes>
             {usuario && (
               <Route path='/' element={<MainPage />} />
@@ -49,9 +54,11 @@ function App() {
             <Route path='/contacto' element={<Contacto />} />
             <Route path={`/movies/:id/:title`} element={<MovieRooms />} />
             <Route path='/reserva/:id/:title/:selectedRoom/:hora' element={<Seats />}/>
-            <Route path='/reserva/:id/:title/:selectedRoom/:ventana-emergente' element={<VentanaEmergente />}/>
-          </Routes>
+        </Routes>
+
+
         </BrowserRouter>
+
       </StyledApp>
     </>
   );

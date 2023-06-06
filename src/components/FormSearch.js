@@ -3,11 +3,15 @@ import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
 const FormSearch = () => {
+    // Creo la variable title y el setTitle, en la que se guarda la pelicula
+    // que se quiere buscar
+
     const [title, setTitle] = useState("");
     const {setQuery, error} = useContext(DataContext);
     //const {data} = useFetch("&s=batman");
     
-
+    // Creo la funcion handleSubmit, que cuando envie el formulario
+    // encuentre la pelicula
     const handleSubmit = (e) => {
         e.preventDefault();
         setQuery(title);
