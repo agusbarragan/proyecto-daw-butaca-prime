@@ -10,6 +10,7 @@ import jsPDF from 'jspdf';
 import QRcode from 'qrcode.react';
 import { ReciboPdf } from './ReciboPdf';
 import { Footer } from './Footer';
+import NavigationBar from './Navbar';
 
 export default function CinemaRoom() {
     const [seats, setSeats] = useState(new Array(60).fill(false)); // matriz de butacas
@@ -72,7 +73,7 @@ export default function CinemaRoom() {
                 precioReserva: `${selectedPrice} €`,
                 fecha: new Date(),
             });            
-
+            // Llamo al componente ReciboPdf y le paso las propiedades
             ReciboPdf(
                 nuevoNumeroRecibo,
                 userEmail,
@@ -95,6 +96,7 @@ export default function CinemaRoom() {
 
     return (
         <Container>
+            <NavigationBar />
             <h1 class='text-light'>Butacas disponibles</h1>
             <Row>
                 {seats.map((seat, index) => (
@@ -133,6 +135,7 @@ export default function CinemaRoom() {
                     </Modal>
         
             <BackButton />
+            <Footer />
 
         </Container>
     );

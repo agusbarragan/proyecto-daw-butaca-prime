@@ -15,6 +15,7 @@ function Reviews() {
   const db = getFirestore(firebaseApp);
   const usuario = auth.currentUser.email;
 
+  // Añado la reseña a la base de datos a la coleccion 'reseñas' en Firestore
   const addReview = async (event) => {
     event.preventDefault();
     if (!newReview.trim()) {
@@ -27,13 +28,14 @@ function Reviews() {
         fecha: serverTimestamp(),
         usuarioEmail: usuario,
       });
-      console.log('Document written with ID: ', docRef.id);
+      console.log('ID del documento: ', docRef.id);
       setNewReview(''); // limpiamos el campo de entrada
     } catch (error) {
-      console.error('Error adding review: ', error);
+      console.error('Error al añadir la reseña: ', error);
     }
   };
-  
+
+  // Controlo si el usuario logueado puede borrar su reseña
   const handleShowModal = (id, reviewEmail) => {
     if (usuario && usuario === reviewEmail) {
       setReviewToDelete({ id, reviewEmail });
@@ -42,7 +44,7 @@ function Reviews() {
       alert("Usuario no autorizado para borrar esta reseña");
     }
   }
-
+// Para borrar la reseña de la coleccion 'reseñas' de firestore
   const handleDelete = async () => {
         await deleteDoc(doc(db, 'reseñas', reviewToDelete.id));  
         setShowModal(false);
@@ -83,7 +85,6 @@ function Reviews() {
                   <h6 className='card-title'>{review.usuarioEmail}</h6>
                   </div>
                 
-
                 <div className='card-footer'>
                   <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
@@ -109,14 +110,14 @@ function Reviews() {
                 </div>
 
                 </div>
-                             
                 
               </div>
             ))}
-        </div>
-      </div>
+        </div>   
       <BackButton />
       <Footer />
+      </div>
+ 
     </>
   );
 }

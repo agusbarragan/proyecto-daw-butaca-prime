@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 const API_ENDPOINT = `http://www.omdbapi.com/?apikey=cbd20872`;
 
 export const useFetch = (params) => {
-    const [isLoading, setIsLoading] = useState(true);
+    //const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     const [data, setData] = useState(null);
 
     const fetchMovie = (url) => {
-        setIsLoading(true);
+        //setIsLoading(true);
         fetch(url)
             .then(response => response.json())
             .then(responseJson => {
@@ -17,7 +17,7 @@ export const useFetch = (params) => {
                 }else{
                     setError(true);
                 }
-                setIsLoading(false);
+                //setIsLoading(false);
                 //console.log("data", responseJson);
             })
             .catch(error =>  console.log(error));
@@ -27,5 +27,5 @@ export const useFetch = (params) => {
           fetchMovie(`${API_ENDPOINT}${params}`);
         }, [params])
         
-        return { isLoading, error, data };
+        return { error, data };
 }

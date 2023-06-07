@@ -7,6 +7,9 @@ function ResetPassword() {
   const [email, setEmail] = useState('');
 
   function handleResetPassword() {
+    // Le paso a la funcion sendPasswordResetEmail el auth y el email
+    // Luego aparecera una alerta diciendo que se ha enviado un correo
+    // El catch controla el error
     sendPasswordResetEmail(auth, email)
       .then(() => {
         alert('Se ha enviado un correo electrónico de restablecimiento de contraseña.');
@@ -15,7 +18,8 @@ function ResetPassword() {
         alert(`Error al enviar el correo electrónico de restablecimiento de contraseña: ${error.message}`);
       });
   }
-
+  
+// Creo un div con el input para escribir el correo y el boton para solicitar una nueva contraseña
   return (
     <div>
       <h2 className='text-light'>Restablecer contraseña</h2>

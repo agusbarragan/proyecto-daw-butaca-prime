@@ -5,6 +5,8 @@ import salaCine from "../images/salaCine.png";
 import salaCine2 from "../images/salaCine2.png";
 import salaCine3 from "../images/salaCine3.png";
 import BackButton from './BackButton';
+import NavigationBar from './Navbar';
+import { Footer } from './Footer';
 
 function MovieRooms() {
   // Obtiene la id de la película desde los parámetros de la URL
@@ -43,6 +45,7 @@ function MovieRooms() {
   return (
     <>
     {/* Creo las tres salas disponibles  */}
+    <NavigationBar />
     <Container className="my-5">
       <h2 className="text-center text-light mb-5">Salas disponibles</h2>
       <Row>
@@ -79,6 +82,7 @@ function MovieRooms() {
       )}
     </Container>
     <BackButton />
+    <Footer />
     </>
   );
 }

@@ -3,13 +3,13 @@ import { DataContext } from "../context/DataContext";
 import ItemMovie from "./ItemMovie";
 
 const Movies = () => {
-    const { isLoading, data } = useContext(DataContext);
+    const { data } = useContext(DataContext);
 
     return (
         <div className="movies-content">   
-        {/**Si el loading no esta cargando muestrame los datos de la pelicula sino lo muestra vacio */}
+        {/**Si data es null muestra una cadena vacia, sino muestrame los datos de la pelicula */}
             {
-                !isLoading ?
+                data !== null ?
                 data.filter(item => item.Year === "2023").map(filteredItem => (
                     <ItemMovie
                         key={filteredItem.imdbID}
@@ -23,13 +23,10 @@ const Movies = () => {
                     : ''
             }            
             <>
-            {/*<button onClick={addSeats} type="button"></button>*/}
+                {/*<button onClick={addSeats} type="button"></button>*/}
             </>
-
         </div>
-
     );
-
 }
 
 export default Movies;

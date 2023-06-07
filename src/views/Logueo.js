@@ -31,7 +31,7 @@ const Logueo = () => {
     return (
         <>
             <div class="container mt-5">
-                <h1 class="text-center display-4 text-light">Butaca Prime</h1>
+                <h1 class="text-center display-3 text-light">Butaca Prime</h1>
             </div>
             <div className='divLogueo'>
                 {showResetPassword ? (
