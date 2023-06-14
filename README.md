@@ -16,11 +16,11 @@ Con este comando ya instalará todas las dependencias del proyecto.
 
 Para arrancar el proyecto.
 
-## Modelo
+## Modelo 📈
 
 ![Diagrama](https://github.com/agusbarragan/proyecto-daw-limpio/blob/master/DIAGRAMA_PROYECTO_DAW%20-%20%20Diagrama%20de%20flujo.jpeg)
 
-## Tecnologías implementadas
+## Tecnologías implementadas 👾
 
 FRONT
 - React
@@ -28,6 +28,9 @@ FRONT
 
 BACK
 - Firebase
+
+## Autor 🙋‍♂️
+- Agustín Barragán Lara
 
 ## Bibliografía 📖
 
