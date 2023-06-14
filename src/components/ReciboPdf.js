@@ -1,6 +1,5 @@
 import React from 'react'
 import jsPDF from 'jspdf';
-import QRcode from 'qrcode.react';
 
 export const ReciboPdf = (nuevoNumeroRecibo, userEmail, salaReserva, hora, butacasReservadas, title, selectedPrice) => {
     // Creo la constante doc a traves de la libreria jsPDF

@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-//import { auth } from '../firebase-config'
-//import { Auth } from 'firebase/auth';
 import loginWithEmailPassword from '../functions/loginWithEmailPassword';
 import registerUser from '../functions/registerUser';
 import loginWithGoogle from '../functions/loginWithGoogle';
 import { FcGoogle } from 'react-icons/fc';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../firebase-config';
 import ResetPassword from '../functions/resetPassword';
 
 

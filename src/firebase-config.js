@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { getFirestore } from "firebase/firestore";
+//import { getFirestore } from "firebase/firestore";
 
+//Config del firabase
 const firebaseConfig = {
   apiKey: "AIzaSyDaTItMFVd2pTulaZ9Gb9ccMLs5wrjyWQo",
   authDomain: "fir-proyectodaw.firebaseapp.com",
@@ -14,9 +15,10 @@ const firebaseConfig = {
 };
 
 
-
+//Arranca la app
 const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp);
+
+//const db = getFirestore(firebaseApp);
 
 export const auth = getAuth(firebaseApp);
 getDatabase(firebaseApp);

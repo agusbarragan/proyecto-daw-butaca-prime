@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
-import { Footer } from './Footer';
 
 const FormSearch = () => {
     // Creo la variable title y el setTitle, en la que se guarda la pelicula

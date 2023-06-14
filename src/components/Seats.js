@@ -6,7 +6,6 @@ import firebaseApp from '../firebase-config';
 import { getAuth } from 'firebase/auth';
 import { onSnapshot, collection, addDoc, doc, getFirestore } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-import jsPDF from 'jspdf';
 import QRcode from 'qrcode.react';
 import { ReciboPdf } from './ReciboPdf';
 import { Footer } from './Footer';
