@@ -31,8 +31,8 @@ BACK
 
 ## Bibliografía 📖
 
-- [Firebase](https://firebase.google.com/docs).
-- [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
+- [Firebase](https://firebase.google.com/docs)
+- [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [The Open Movie Databes API](https://www.omdbapi.com/)
 - [React-Icons](https://react-icons.github.io/react-icons/)
 - [React-Bootstrap](https://react-bootstrap.github.io/)
