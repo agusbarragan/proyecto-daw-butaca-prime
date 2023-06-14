@@ -16,7 +16,11 @@ Con este comando ya instalará todas las dependencias del proyecto.
 
 Para arrancar el proyecto.
 
-## Tecnologías implementadas
+## Modelo 📈
+
+![Diagrama](https://github.com/agusbarragan/proyecto-daw-limpio/blob/master/DIAGRAMA_PROYECTO_DAW%20-%20%20Diagrama%20de%20flujo.jpeg)
+
+## Tecnologías implementadas 👾
 
 FRONT
 - React
@@ -25,16 +29,13 @@ FRONT
 BACK
 - Firebase
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Autor 🙋‍♂️
+- Agustín Barragán Lara
 
 ## Bibliografía 📖
 
-- [Firebase](https://firebase.google.com/docs).
-- [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
+- [Firebase](https://firebase.google.com/docs)
+- [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [The Open Movie Databes API](https://www.omdbapi.com/)
 - [React-Icons](https://react-icons.github.io/react-icons/)
 - [React-Bootstrap](https://react-bootstrap.github.io/)
