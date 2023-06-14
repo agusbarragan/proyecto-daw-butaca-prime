@@ -16,13 +16,21 @@ Con este comando ya instalará todas las dependencias del proyecto.
 
 Para arrancar el proyecto.
 
+## Tecnologías implementadas
+FRONT
+React
+Bootstrap
+
+BACK
+Firebase
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Bibliografía
+## Bibliografía 📖
 
 •	[Firebase](https://firebase.google.com/docs).
 • [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
