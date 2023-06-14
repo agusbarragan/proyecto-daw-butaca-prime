@@ -17,12 +17,13 @@ Con este comando ya instalará todas las dependencias del proyecto.
 Para arrancar el proyecto.
 
 ## Tecnologías implementadas
+
 FRONT
 - React
 - Bootstrap
 
 BACK
-Firebase
+- Firebase
 
 ## Learn More
 
@@ -32,10 +33,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Bibliografía 📖
 
-•	- [Firebase](https://firebase.google.com/docs).
-• - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
-•	- [The Open Movie Databes API](https://www.omdbapi.com/)
-•	- [React-Icons](https://react-icons.github.io/react-icons/)
-•	- [React-Bootstrap](https://react-bootstrap.github.io/)
-•	- [Styled-components](https://styled-components.com/)
+- [Firebase](https://firebase.google.com/docs).
+- [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
+- [The Open Movie Databes API](https://www.omdbapi.com/)
+- [React-Icons](https://react-icons.github.io/react-icons/)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [Styled-components](https://styled-components.com/)
 
