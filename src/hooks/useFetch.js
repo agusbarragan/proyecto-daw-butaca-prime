@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-const API = `http://www.omdbapi.com/?apikey=cbd20872`;
-
+const API = `https://www.omdbapi.com/?apikey=cbd20872`;   //he tenido que añadir "s" al final de http porque al no ser "seguro" daba problemas al alojar la web en firebase hosting
+                                                          // y no funcionaba el buscador de peliculas al usarlo.
 export const useFetch = (params) => {
     //const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);

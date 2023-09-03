@@ -12,13 +12,13 @@ function Reviews() {
   const [showModal, setShowModal] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState(null);
 
-  const db = getFirestore(firebaseApp);
+  const db = getFirestore(firebaseApp); // establecemos conexion a la bbdd
   const usuario = auth.currentUser.email;
 
   // Añado la reseña a la base de datos a la coleccion 'reseñas' en Firestore
   const addReview = async (event) => {
     event.preventDefault();
-    if (!newReview.trim()) {
+    if (!newReview.trim()) { // si esta vacio o tiene espacios en blanco, muestra alerta
       alert('El comentario no puede estar en blanco');
       return;
     }
@@ -52,7 +52,8 @@ function Reviews() {
     }
   
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'reseñas'), (snapshot) => {
+    console.log("has cargado esto");
+    const unsubscribe = onSnapshot(collection(db, 'reseñas'), (snapshot) => { // onsnapshot guarda una "instantanea" del documento con los datos actuales y luego los muestra.
       const newReviews = snapshot.docs.map((doc) => ({
         id: doc.id,
         comentarios: doc.data().comentarios,

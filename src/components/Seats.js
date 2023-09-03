@@ -19,18 +19,19 @@ export default function CinemaRoom() {
     const selectedRoom = useParams();  //Accedo a la url que esta en MovieRooms.js y luego esta variable la paso a la constante salaReserva y la leo en el document.write salaReserva.selectedRoom
     const [showModal, setShowModal] = useState(false);
 
-    const db = getFirestore(firebaseApp);
+    const db = getFirestore(firebaseApp); // establecemos conexion a la bbdd
 
     const toggleSeat = (index) => { // función para cambiar el estado de la butaca al hacer clic
         const newSeats = [...seats];
-        newSeats[index] = !newSeats[index];
+        newSeats[index] = !newSeats[index]; // si el estado actual es true, se cambia a false, y viceversa
         setSeats(newSeats);
 
         setSelectedSeats(selectedSeats + (newSeats[index] ? 1 : -1));
         setSelectedPrice(selectedPrice + (newSeats[index] ? 5 : -5));
 
         const seatElement = document.getElementById(`seat-${index}`);
-        if (seatElement) {
+        // este if no funcionaba
+        if (seatElement) {  // si encuentra el seatElement,
           if (newSeats[index]) {
             seatElement.classList.add('seat-selected');
             seatElement.disabled = true;
